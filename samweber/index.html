@@ -225,7 +225,7 @@ img { display: block; max-width: 100%; }
   display: inline-block;
   width: 0.55em;
   height: 1.1em;
-  background: var(--blue);
+  background: var(--sienna);
   vertical-align: text-bottom;
   animation: blink 0.8s step-end infinite;
   margin-left: 1px;
@@ -1164,7 +1164,7 @@ img { display: block; max-width: 100%; }
 
 .ticket-step.visible {
   opacity: 1;
-  max-height: 500px;
+  max-height: 800px;
   pointer-events: auto;
 }
 
@@ -1827,10 +1827,10 @@ footer {
       <div class="ticket-qty-label">How many?</div>
       <div class="ticket-qty-picker">
         <button id="qtyMinus" aria-label="Decrease quantity">&minus;</button>
-        <span id="ticketQty">1</span>
+        <span id="ticketQty">0</span>
         <button id="qtyPlus" aria-label="Increase quantity">+</button>
       </div>
-      <div class="ticket-qty-total" id="qtyTotal">1 &times; $30 = $30</div>
+      <div class="ticket-qty-total" id="qtyTotal"></div>
     </div>
 
     <div class="ticket-step" id="payStep">
@@ -2065,7 +2065,7 @@ footer {
   var noteEl = document.getElementById('ticketNote');
   var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-  var qty = 1;
+  var qty = 0;
   var activeCard = null;
 
   function getPrice() {
@@ -2077,6 +2077,10 @@ footer {
   }
 
   function updateTotal() {
+    if (qty === 0) {
+      qtyTotal.innerHTML = '';
+      return;
+    }
     var price = getPrice();
     var total = price * qty;
     qtyTotal.innerHTML = qty + ' &times; $' + price + ' = $' + total;
@@ -2096,7 +2100,7 @@ footer {
     noteEl.innerHTML = 'In the Venmo note, include: <code>Your Name \u2014 Sam Weber 4/16 \u2014 ' + type + ' &times; ' + qty + '</code>';
   }
 
-  // Step 1: Pick type → reveal qty
+  // Step 1: Pick type → reveal qty (starting at 0)
   cards.forEach(function(card) {
     card.addEventListener('click', function() {
       cards.forEach(function(c) { c.classList.remove('active'); });
@@ -2104,43 +2108,38 @@ footer {
       activeCard = card;
 
       // Reset qty when switching type
-      qty = 1;
-      qtyDisplay.textContent = '1';
+      qty = 0;
+      qtyDisplay.textContent = '0';
       updateTotal();
+
+      // Hide payment when switching type
+      payStep.classList.remove('visible');
 
       // Reveal qty step
       qtyStep.classList.add('visible');
-
-      // Update payment if already visible
-      if (payStep.classList.contains('visible')) {
-        updatePayment();
-      }
     });
   });
 
-  // Step 2: Adjust quantity → reveal payment
-  function handleQtyChange() {
-    updateTotal();
-    if (!payStep.classList.contains('visible')) {
-      payStep.classList.add('visible');
-    }
-    updatePayment();
-  }
-
+  // Step 2: Adjust quantity → reveal payment when qty >= 1
   minusBtn.addEventListener('click', function() {
     if (qty > 1) {
       qty--;
       qtyDisplay.textContent = qty;
+      updateTotal();
+      updatePayment();
     }
-    handleQtyChange();
   });
 
   plusBtn.addEventListener('click', function() {
     if (qty < 10) {
       qty++;
       qtyDisplay.textContent = qty;
+      updateTotal();
+      if (!payStep.classList.contains('visible')) {
+        payStep.classList.add('visible');
+      }
+      updatePayment();
     }
-    handleQtyChange();
   });
 })();
 
