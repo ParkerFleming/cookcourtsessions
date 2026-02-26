@@ -1868,19 +1868,19 @@ footer {
         <div class="ticket-stub-body">
           <div class="ticket-stub-left">
             <div class="ticket-stub-handle">
-              <a href="https://venmo.com/ParkerFleming?txn=pay&amount=30&note=Sam%20Weber%204%2F16%20-%20SEATED%20x%201" id="venmoLink" target="_blank" rel="noopener">@ParkerFleming</a>
+              <a href="https://venmo.com/ParkerFleming?txn=pay&amount=30&note=YOUR%20NAME%20-%20Sam%20Weber%204%2F16%20-%20SEATED%20x%201" id="venmoLink" target="_blank" rel="noopener">@ParkerFleming</a>
               <button class="copy-btn" id="copyBtn">copy</button>
             </div>
             <p class="ticket-stub-note" id="ticketNote">
               In the Venmo note, include: <code>Your Name — Sam Weber 4/16 — SEATED × 1</code>
             </p>
-            <a class="venmo-pay-btn" id="venmoPayBtn" href="https://venmo.com/ParkerFleming?txn=pay&amount=30&note=Sam%20Weber%204%2F16%20-%20SEATED%20x%201">
+            <a class="venmo-pay-btn" id="venmoPayBtn" href="https://venmo.com/ParkerFleming?txn=pay&amount=30&note=YOUR%20NAME%20-%20Sam%20Weber%204%2F16%20-%20SEATED%20x%201">
               <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.5 1.5c.9 1.5 1.3 3 1.3 4.9 0 6.1-5.2 14-9.4 19.6H3.4L.5 2.3l7-.7 1.7 13.6c1.6-2.6 3.5-6.7 3.5-9.5 0-1.8-.3-3-0.8-4L19.5 1.5z"/></svg>
               Pay with Venmo
             </a>
           </div>
           <div class="ticket-stub-qr">
-            <a href="https://venmo.com/ParkerFleming?txn=pay&amount=30&note=Sam%20Weber%204%2F16%20-%20SEATED%20x%201" id="venmoQrLink" target="_blank" rel="noopener">
+            <a href="https://venmo.com/ParkerFleming?txn=pay&amount=30&note=YOUR%20NAME%20-%20Sam%20Weber%204%2F16%20-%20SEATED%20x%201" id="venmoQrLink" target="_blank" rel="noopener">
               <img src="img/venmo-qr.jpg" alt="Scan to pay via Venmo">
             </a>
           </div>
@@ -2126,7 +2126,7 @@ footer {
     var price = getPrice();
     var total = price * qty;
     var type = getType();
-    var venmoNote = 'Sam Weber 4/16 - ' + type + ' x ' + qty;
+    var venmoNote = 'YOUR NAME - Sam Weber 4/16 - ' + type + ' x ' + qty;
     var webUrl = 'https://venmo.com/ParkerFleming?txn=pay&amount=' + total + '&note=' + encodeURIComponent(venmoNote);
 
     currentVenmoUrl = webUrl;
@@ -2143,7 +2143,7 @@ footer {
     var price = getPrice();
     var total = price * qty;
     var type = getType();
-    var venmoNote = 'Sam Weber 4/16 - ' + type + ' x ' + qty;
+    var venmoNote = 'YOUR NAME - Sam Weber 4/16 - ' + type + ' x ' + qty;
     var appUrl = 'venmo://paycharge?txn=pay&recipients=ParkerFleming&amount=' + total + '&note=' + encodeURIComponent(venmoNote);
     window.location.href = appUrl;
     setTimeout(function() { window.location.href = currentVenmoUrl; }, 1500);
