@@ -1,0 +1,2008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sam Weber — Live in a Living Room — 04.16.26</title>
+<meta name="description" content="Sam Weber. House concert. Cherry Knolls, Centennial CO. April 16, 2026. ~35 seats. That's it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,500;1,9..144,700;1,9..144,900&family=Inconsolata:wght@300;400;500;600;700&family=Literata:ital,opsz,wght@0,7..72,300;0,7..72,400;0,7..72,500;1,7..72,300;1,7..72,400&display=swap" rel="stylesheet">
+<style>
+/* ==============================================
+   THE LAST WEBSITE ON THE PRAIRIE
+   Sam Weber House Concert — Cherry Knolls, CO
+   "analog soul, digital skin"
+   ============================================== */
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --parchment: #F0EAD6;
+  --cream: #FAF7F0;
+  --ink: #2C1810;
+  --blue: #2D5BFF;
+  --sienna: #C45D3E;
+  --gold: #C8A951;
+  --sage: #7A8575;
+  --navy: #0F1A2B;
+  --navy-light: #1a2d45;
+  --frame: #E8E0D0;
+
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Literata', Georgia, serif;
+  --font-mono: 'Inconsolata', 'Courier New', monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--parchment);
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* — Scroll Progress Bar — */
+.scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  width: 0%;
+  background: var(--sienna);
+  z-index: 9999;
+  transition: width 0.1s linear;
+}
+
+/* — Paper Grain Overlay — */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px;
+}
+
+a { color: var(--blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+img { display: block; max-width: 100%; }
+
+/* ==============================================
+   NAV
+   ============================================== */
+.nav-bar {
+  position: fixed;
+  top: 3px; left: 0; right: 0;
+  z-index: 1000;
+  padding: 0.6rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  background: rgba(240, 234, 214, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(44, 24, 16, 0.08);
+}
+
+.nav-url { color: var(--sage); letter-spacing: 0.02em; }
+.nav-url b { color: var(--ink); font-weight: 600; }
+
+.nav-links { display: flex; gap: 1.25rem; }
+.nav-links a {
+  color: var(--sage);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--ink); text-decoration: none; }
+
+/* Mobile sticky CTA pill — hidden by default, shown via JS after scrolling past hero */
+.mobile-cta {
+  display: none;
+  position: fixed;
+  bottom: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1001;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--cream);
+  background: var(--sienna);
+  border: none;
+  padding: 0.75rem 1.75rem;
+  border-radius: 100px;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(196, 93, 62, 0.35);
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-decoration: none;
+}
+.mobile-cta:hover { transform: translateX(-50%) scale(1.03); box-shadow: 0 6px 24px rgba(196, 93, 62, 0.45); text-decoration: none; }
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .mobile-cta.visible { display: block; }
+}
+
+/* ==============================================
+   HERO
+   ============================================== */
+.hero {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 0;
+  padding-top: 3rem;
+  position: relative;
+  background: var(--parchment);
+  /* Digital Prairie V1 as atmospheric background */
+  background-image: url('img/digital-prairie-v1-bg-large.jpg');
+  background-size: cover;
+  background-position: center top;
+  background-blend-mode: multiply;
+  background-attachment: fixed;
+}
+/* Parchment overlay to control prairie opacity */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(240, 234, 214, 0.62);
+  z-index: 0;
+}
+.hero > * { position: relative; z-index: 1; }
+
+@media (max-width: 768px) {
+  .hero { background-attachment: scroll; }
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4rem 3rem 4rem 4rem;
+  position: relative;
+}
+
+.hero-date {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 900;
+  font-style: italic;
+  color: var(--sienna);
+  letter-spacing: 0.04em;
+  margin-bottom: 1rem;
+}
+
+.hero-name {
+  font-family: var(--font-display);
+  font-size: clamp(5rem, 12vw, 10rem);
+  font-weight: 900;
+  font-style: italic;
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+  margin-bottom: 1.5rem;
+}
+
+.hero-name span {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(40px) rotate(-2deg);
+  animation: heroWordIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.hero-name span:nth-child(1) { animation-delay: 0.1s; }
+.hero-name span:nth-child(2) { animation-delay: 0.3s; }
+
+@keyframes heroWordIn {
+  to { opacity: 1; transform: translateY(0) rotate(0); }
+}
+
+.hero-url {
+  font-family: var(--font-mono);
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  color: var(--sienna);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  margin-bottom: 2rem;
+  min-height: 1.4em;
+}
+
+.hero-url .cursor {
+  display: inline-block;
+  width: 0.55em;
+  height: 1.1em;
+  background: var(--blue);
+  vertical-align: text-bottom;
+  animation: blink 0.8s step-end infinite;
+  margin-left: 1px;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.hero-tagline {
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--ink);
+  line-height: 1.5;
+  max-width: 420px;
+  opacity: 0;
+  animation: fadeSlideUp 0.8s ease 0.9s forwards;
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Hero photo — framed like a print */
+.hero-photo-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 3rem 2rem 0;
+}
+
+.hero-photo {
+  position: relative;
+  background: var(--frame);
+  padding: 0.65rem;
+  box-shadow: 0 8px 40px rgba(44, 24, 16, 0.12), 0 2px 8px rgba(44, 24, 16, 0.06);
+  max-width: 460px;
+  opacity: 0;
+  animation: fadeIn 1s ease 0.2s forwards;
+}
+
+@keyframes fadeIn { to { opacity: 1; } }
+
+.hero-photo img {
+  width: 100%;
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+/* Warm overlay on photos that lifts on hover */
+.photo-framed {
+  position: relative;
+  overflow: hidden;
+}
+
+.photo-framed::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(196, 150, 80, 0.1);
+  mix-blend-mode: multiply;
+  transition: opacity 0.5s ease;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.photo-framed:hover::after {
+  opacity: 0;
+}
+
+.photo-credit {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--sage);
+  letter-spacing: 0.06em;
+  margin-top: 0.5rem;
+  text-align: right;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    min-height: auto;
+    padding-top: 3.5rem;
+  }
+  .hero-photo-wrap {
+    padding: 0;
+  }
+  .hero-photo {
+    max-width: 100%;
+    padding: 0;
+    box-shadow: none;
+  }
+  .hero-content {
+    padding: 2rem 1.5rem 3rem;
+  }
+  .hero-name {
+    font-size: clamp(3.8rem, 16vw, 6rem);
+  }
+}
+
+/* ==============================================
+   HALFTONE DIVIDER — print/zine nod
+   ============================================== */
+.halftone-divider {
+  height: 40px;
+  background: radial-gradient(circle, var(--ink) 1px, transparent 1px);
+  background-size: 8px 8px;
+  opacity: 0.04;
+}
+
+/* ==============================================
+   LISTENING ROOM (dark section)
+   ============================================== */
+/* ==============================================
+   LISTENING ROOM — Header + Edge-to-Edge Player
+   ============================================== */
+
+/* --- Intro header — standalone above the player --- */
+.lr-header {
+  background: var(--navy);
+  color: #c8c0b8;
+  padding: 4rem 3rem 2.5rem;
+}
+
+.listening-room .section-label {
+  color: rgba(200, 192, 184, 0.35);
+  margin-bottom: 1.5rem;
+}
+
+.lr-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+  font-weight: 400;
+  font-style: italic;
+  color: #e8e0d6;
+  line-height: 1.25;
+  margin-bottom: 0.5rem;
+  max-width: 800px;
+}
+
+.lr-subtitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--sienna);
+  line-height: 1.25;
+  margin-bottom: 0.75rem;
+}
+
+.lr-cta {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: rgba(200, 192, 184, 0.5);
+  letter-spacing: 0.08em;
+}
+
+/* --- The player: thumbnails + video, zero gaps --- */
+.listening-room {
+  background: #000;
+  color: #c8c0b8;
+  position: relative;
+}
+
+.lr-player-grid {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  height: 75vh;
+  min-height: 450px;
+  max-height: 800px;
+}
+
+/* Left: thumbnail strip — tight vertical stack */
+.tracklist {
+  background: #0a0e14;
+  overflow-y: auto;
+  font-family: var(--font-mono);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(200,192,184,0.15) transparent;
+}
+
+.tracklist::-webkit-scrollbar { width: 4px; }
+.tracklist::-webkit-scrollbar-track { background: transparent; }
+.tracklist::-webkit-scrollbar-thumb { background: rgba(200,192,184,0.15); border-radius: 2px; }
+
+.track {
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  display: block;
+}
+
+.track:last-child { border-bottom: none; }
+
+/* Sienna bar on active track */
+.track::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: transparent;
+  transition: background 0.2s;
+}
+
+.track.active::after {
+  background: var(--sienna);
+}
+
+.track:hover {
+  background: rgba(255,255,255,0.04);
+}
+
+.track.active {
+  background: rgba(196, 93, 62, 0.1);
+}
+
+/* Thumbnail: fills the full width, no padding */
+.track-thumb {
+  width: 100%;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  position: relative;
+  display: block;
+}
+
+.track-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.5;
+  transition: opacity 0.25s;
+  display: block;
+}
+
+.track:hover .track-thumb img {
+  opacity: 0.75;
+}
+
+.track.active .track-thumb img {
+  opacity: 0.9;
+}
+
+/* Play triangle on hover */
+.track-thumb::after {
+  content: '▶';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: rgba(255,255,255,0);
+  transition: color 0.2s;
+  pointer-events: none;
+}
+
+.track:hover .track-thumb::after {
+  color: rgba(255,255,255,0.6);
+}
+
+.track.active .track-thumb::after {
+  content: '';
+}
+
+/* Track label — compact bar under thumbnail */
+.track-info {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.6rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.track-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: transparent;
+  flex-shrink: 0;
+  transition: background 0.3s;
+}
+
+.track.active .track-dot {
+  background: var(--sienna);
+  animation: pulse-dot 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.4); }
+}
+
+.track-num {
+  font-size: 0.7rem;
+  color: rgba(200,192,184,0.2);
+  flex-shrink: 0;
+}
+
+.track-name {
+  font-size: 0.72rem;
+  color: #807870;
+  transition: color 0.2s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+  min-width: 0;
+}
+
+.track.active .track-name { color: #e8e0d6; }
+.track:hover .track-name { color: #b0a898; }
+
+/* Leaders hidden in this compact layout */
+.track-leaders { display: none; }
+
+.track-duration {
+  font-size: 0.65rem;
+  color: rgba(200,192,184,0.2);
+  flex-shrink: 0;
+}
+
+.track.active .track-duration {
+  color: var(--sienna);
+  font-size: 0.6rem;
+}
+
+/* --- Right: Video player fills all remaining space --- */
+.yt-player {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  overflow: hidden;
+}
+
+#ytPlayerTarget {
+  position: absolute;
+  inset: 0;
+}
+
+.yt-player iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  border: 0;
+}
+
+.yt-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  cursor: pointer;
+  background: radial-gradient(ellipse at center, rgba(15, 26, 43, 0.3) 0%, #000 70%);
+}
+
+.yt-placeholder .play-circle {
+  width: 72px; height: 72px;
+  border: 2px solid rgba(255,255,255,0.12);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.25);
+  font-size: 1.5rem;
+  transition: all 0.3s;
+}
+
+.yt-placeholder:hover .play-circle {
+  border-color: var(--sienna);
+  color: var(--sienna);
+  transform: scale(1.08);
+}
+
+.yt-placeholder span {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.2);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* --- Mobile --- */
+@media (max-width: 768px) {
+  .lr-header {
+    padding: 3rem 1.5rem 2rem;
+  }
+
+  .lr-player-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: 56vw auto;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+  }
+
+  /* Video on top, filmstrip below */
+  .yt-player {
+    order: -1;
+    height: auto;
+  }
+
+  /* Thumbnails as horizontal scroll strip */
+  .tracklist {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .tracklist::-webkit-scrollbar { display: none; }
+
+  .track {
+    flex-shrink: 0;
+    width: 140px;
+  }
+
+  .track-info {
+    padding: 0.35rem 0.5rem;
+  }
+
+  .track::after {
+    /* Move indicator to bottom on mobile */
+    right: 0; left: 0;
+    top: auto; bottom: 0;
+    width: auto; height: 2px;
+  }
+}
+
+/* ==============================================
+   SECTION UTILITIES
+   ============================================== */
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin-bottom: 2rem;
+}
+
+/* ==============================================
+   THE FILE — ABOUT SECTION
+   ============================================== */
+.the-file {
+  background: var(--cream);
+  padding: 5rem 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.pullquote {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 3.2rem);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.25;
+  color: var(--ink);
+  max-width: 900px;
+  margin-bottom: 4rem;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.pullquote::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.2em;
+  bottom: 0.2em;
+  width: 3px;
+  background: var(--gold);
+}
+
+.file-grid {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .file-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+}
+
+.file-photo {
+  position: relative;
+  background: var(--frame);
+  padding: 0.55rem;
+  box-shadow: 0 6px 30px rgba(44,24,16,0.08);
+}
+
+.file-text {}
+
+/* Two voices in the bio */
+.bio-editorial {
+  font-family: var(--font-body);
+  font-size: 1.02rem;
+  line-height: 1.85;
+  color: var(--ink);
+  margin-bottom: 1.5rem;
+}
+
+.bio-editorial em { color: var(--sienna); font-style: italic; }
+
+.bio-dossier {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  line-height: 1.9;
+  color: var(--sage);
+  padding: 1.25rem;
+  background: var(--parchment);
+  border: 1px dashed rgba(44,24,16,0.12);
+  margin-bottom: 2rem;
+}
+
+.bio-dossier strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.file-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.file-links a {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.05em;
+  color: var(--ink);
+  padding: 0.4rem 0.75rem;
+  border: 1px solid rgba(44,24,16,0.15);
+  background: var(--cream);
+  transition: all 0.2s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.file-links a::after {
+  content: '↗';
+  font-size: 0.75rem;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.file-links a:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+  text-decoration: none;
+}
+
+.file-links a:hover::after { opacity: 1; }
+
+@media (max-width: 768px) {
+  .the-file { padding: 3.5rem 1.5rem; }
+}
+
+/* ==============================================
+   SPOTIFY — embedded in the bio section
+   ============================================== */
+.file-photo-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.spotify-embed {}
+
+.spotify-embed iframe {
+  border-radius: 12px;
+  display: block;
+}
+
+/* ==============================================
+   AI IMAGES
+   ============================================== */
+
+/* Digital Prairie — wide atmospheric banner */
+.ai-banner {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+.ai-banner img {
+  width: 100%;
+  display: block;
+  filter: sepia(0.08) saturate(0.9);
+}
+
+/* Living Room — cinematic letterbox strip */
+.ai-scene {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  max-height: 260px;
+}
+.ai-scene img {
+  width: 100%;
+  display: block;
+  filter: saturate(0.85) contrast(1.05);
+  object-fit: cover;
+  object-position: 40% center;
+  height: 260px;
+}
+
+@media (max-width: 768px) {
+  .ai-scene, .ai-scene img { max-height: 180px; height: 180px; }
+}
+
+/* Cowboys Desktop — small accent near ticket/footer */
+.ai-accent {
+  display: flex;
+  justify-content: center;
+  padding: 3rem 2rem;
+  background: var(--parchment);
+  position: relative;
+}
+.ai-accent-frame {
+  width: 280px;
+  max-width: 60%;
+  background: #F5F0E3;
+  padding: 12px;
+  box-shadow: 2px 4px 20px rgba(44,24,16,0.1), 0 1px 3px rgba(44,24,16,0.06);
+  transform: rotate(-1.5deg);
+  transition: transform 0.4s ease;
+}
+.ai-accent-frame:hover {
+  transform: rotate(0deg) scale(1.03);
+}
+.ai-accent-frame img {
+  width: 100%;
+  display: block;
+}
+.ai-accent-caption {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--sage);
+  text-align: center;
+  margin-top: 8px;
+  letter-spacing: 0.05em;
+}
+
+/* Candlelit Audience — atmospheric FOMO image */
+.ai-atmosphere {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+.ai-atmosphere img {
+  width: 100%;
+  display: block;
+  filter: saturate(0.8) contrast(1.1) brightness(0.95);
+}
+.ai-atmosphere::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(15,26,43,0.3) 0%, transparent 30%, transparent 70%, rgba(15,26,43,0.4) 100%);
+  pointer-events: none;
+}
+.ai-atmosphere-caption {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 2rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.08em;
+}
+
+/* ==============================================
+   THE SHOW — BROADSHEET POSTER
+   ============================================== */
+.the-show {
+  background: var(--parchment);
+  padding: 5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.broadsheet {
+  max-width: 620px;
+  width: 100%;
+  border: 3px solid var(--ink);
+  padding: 3rem 2.5rem;
+  position: relative;
+  background: var(--cream);
+  text-align: center;
+  transition: transform 0.4s ease;
+  box-shadow: 0 2px 20px rgba(44,24,16,0.06);
+}
+
+.broadsheet:hover {
+  transform: rotate(0.4deg);
+}
+
+/* Decorative corner marks */
+.broadsheet::before,
+.broadsheet::after {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--gold);
+  position: absolute;
+}
+.broadsheet::before {
+  content: '✦';
+  top: -0.65rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--parchment);
+  padding: 0 0.75rem;
+}
+.broadsheet::after {
+  content: '✦';
+  bottom: -0.65rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--parchment);
+  padding: 0 0.75rem;
+}
+
+.broadsheet-title {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin-bottom: 1.5rem;
+}
+
+.broadsheet-date {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 900;
+  font-style: italic;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 2rem;
+}
+
+.broadsheet-details {
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  line-height: 2.4;
+  color: var(--ink);
+  border-top: 1px solid rgba(44,24,16,0.12);
+  border-bottom: 1px solid rgba(44,24,16,0.12);
+  padding: 1.5rem 0;
+  margin-bottom: 1.5rem;
+}
+
+.broadsheet-details .dl {
+  color: var(--sage);
+  display: inline;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.broadsheet-footer-note {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  color: var(--ink);
+  letter-spacing: 0.04em;
+  line-height: 1.7;
+  font-style: italic;
+  opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+  .the-show { padding: 3.5rem 1.5rem; }
+  .broadsheet { padding: 2rem 1.5rem; }
+}
+
+/* ==============================================
+   TICKETS — "GET IN THE ROOM"
+   ============================================== */
+.tickets {
+  padding: 5rem 2rem;
+  position: relative;
+  /* Digital Prairie V5 as atmospheric background */
+  background-color: var(--parchment);
+  background-image: url('img/digital-prairie-v5-bg-large.jpg');
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: multiply;
+}
+/* Parchment overlay to control prairie opacity on tickets */
+.tickets::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(240, 234, 214, 0.6);
+  z-index: 0;
+}
+.tickets > * { position: relative; z-index: 1; }
+
+/* wider than other sections on large screens */
+.tickets-inner {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+/* Text readability over prairie background — lift text with subtle shadow */
+.tickets-heading,
+.tickets-message,
+.tickets-suggested,
+.tickets-after,
+.ticket-type-picker,
+.section-label {
+  text-shadow: 0 0 20px var(--parchment), 0 0 40px var(--parchment), 0 0 60px var(--parchment);
+}
+
+.seats-box {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  padding: 0.6rem 1.25rem;
+  border: 2px solid var(--sienna);
+  background: rgba(196, 93, 62, 0.04);
+}
+
+.seats-num {
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  font-weight: 900;
+  font-style: italic;
+  color: var(--sienna);
+  line-height: 1;
+  animation: gentle-pulse 3s ease-in-out infinite;
+}
+
+@keyframes gentle-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+}
+
+.seats-label {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--sienna);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 500;
+}
+
+/* Ticket type picker — Seated vs Standing */
+.ticket-type-picker {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.ticket-type {
+  flex: 1;
+  max-width: 200px;
+  padding: 1.25rem 1rem;
+  border: 2px solid rgba(44, 24, 16, 0.15);
+  background: rgba(250, 247, 240, 0.6);
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  text-align: center;
+}
+
+.ticket-type:hover {
+  border-color: rgba(196, 93, 62, 0.4);
+}
+
+.ticket-type.active {
+  border-color: var(--sienna);
+  background: rgba(196, 93, 62, 0.06);
+}
+
+.ticket-type-name {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--ink);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.ticket-type-price {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 900;
+  font-style: italic;
+  color: var(--sienna);
+  line-height: 1;
+  margin-bottom: 0.35rem;
+}
+
+.ticket-type-suggested {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--sage);
+  margin-bottom: 0.75rem;
+}
+
+.ticket-type-avail {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--sienna);
+  font-weight: 500;
+}
+
+.tickets-heading {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 7vw, 5rem);
+  font-weight: 900;
+  font-style: italic;
+  color: var(--ink);
+  line-height: 0.95;
+  margin-bottom: 0.5rem;
+}
+
+.tickets-suggested {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--sage);
+  margin-bottom: 1.75rem;
+}
+
+.tickets-suggested strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.tickets-message {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.85;
+  color: var(--ink);
+  margin-bottom: 2.5rem;
+  max-width: 600px;
+}
+
+/* Ticket stub — analog concert ticket feel */
+.ticket-stub {
+  position: relative;
+  background: var(--cream);
+  padding: 2.25rem 2.5rem 2rem;
+  margin-bottom: 2.5rem;
+  max-width: 520px;
+  /* Double border — outer solid, inner via outline */
+  border: 3px solid var(--ink);
+  outline: 1px solid var(--ink);
+  outline-offset: 4px;
+  /* Warm lift off the prairie */
+  box-shadow:
+    0 4px 20px rgba(44, 24, 16, 0.15),
+    0 8px 40px rgba(44, 24, 16, 0.08);
+}
+
+/* Scalloped tear edge along the top */
+.ticket-stub::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 8px;
+  right: 8px;
+  height: 8px;
+  background: radial-gradient(circle 4px at 4px 8px, transparent 4px, var(--cream) 4px);
+  background-size: 8px 8px;
+  background-position: 0 0;
+}
+/* Matching scallop mask to punch through outer border */
+.ticket-stub::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 8px;
+  right: 8px;
+  height: 8px;
+  background: radial-gradient(circle 4px at 4px 0, transparent 4px, var(--cream) 4px);
+  background-size: 8px 8px;
+  background-position: 0 0;
+}
+
+.ticket-stub-label {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: var(--ink);
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px dashed rgba(44, 24, 16, 0.25);
+  font-weight: 600;
+}
+
+.ticket-stub-handle {
+  font-family: var(--font-mono);
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.ticket-stub-handle a {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 3px solid var(--sienna);
+  padding-bottom: 2px;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.ticket-stub-handle a:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+  text-decoration: none;
+}
+
+.copy-btn {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--cream);
+  background: var(--ink);
+  border: 2px solid var(--ink);
+  padding: 0.35rem 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 600;
+}
+
+.copy-btn:hover {
+  background: var(--sienna);
+  border-color: var(--sienna);
+  color: var(--cream);
+}
+
+.copy-btn.copied {
+  background: var(--sienna);
+  border-color: var(--sienna);
+  color: var(--cream);
+}
+
+.ticket-stub-body {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.ticket-stub-left {
+  flex: 1;
+  min-width: 0;
+}
+
+.ticket-stub-qr {
+  flex-shrink: 0;
+}
+
+.ticket-stub-qr img {
+  display: block;
+  width: 150px;
+  border-radius: 6px;
+}
+
+@media (max-width: 500px) {
+  .ticket-stub-body { flex-direction: column; }
+  .ticket-stub-qr img { width: 140px; margin: 0 auto; }
+}
+
+.ticket-stub-note {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--ink);
+  line-height: 1.6;
+  opacity: 0.75;
+}
+
+.ticket-stub-note code {
+  display: inline-block;
+  background: var(--parchment);
+  border: 2px solid rgba(44,24,16,0.12);
+  padding: 0.2rem 0.5rem;
+  color: var(--sienna);
+  font-family: var(--font-mono);
+  font-weight: 600;
+  margin-top: 0.25rem;
+}
+
+/* After-Venmo instructions — readable panel */
+.tickets-after {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--ink);
+  line-height: 1.8;
+  max-width: 520px;
+  background: rgba(250, 247, 240, 0.85);
+  padding: 1.25rem 1.5rem;
+  border-left: 3px solid var(--gold);
+}
+
+@media (max-width: 768px) {
+  .tickets { padding: 3.5rem 1.5rem; }
+  .ticket-stub { padding: 1.5rem 1.75rem; }
+  .tickets-after { padding: 1rem 1.25rem; }
+}
+
+/* ==============================================
+   PHOTO BREAK
+   ============================================== */
+.photo-break {
+  position: relative;
+  overflow: hidden;
+  max-height: 50vh;
+  border-top: 1px solid rgba(44,24,16,0.1);
+  border-bottom: 1px solid rgba(44,24,16,0.1);
+}
+
+.photo-break img {
+  width: 100%;
+  height: 50vh;
+  object-fit: cover;
+  object-position: center 35%;
+}
+
+.photo-break::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(196, 150, 80, 0.08);
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.photo-break .photo-credit {
+  position: absolute;
+  bottom: 0.75rem;
+  right: 1rem;
+  color: rgba(255,255,255,0.5);
+  background: rgba(0,0,0,0.2);
+  padding: 0.2rem 0.5rem;
+  backdrop-filter: blur(4px);
+  z-index: 2;
+  margin-top: 0;
+}
+
+/* ==============================================
+   FOOTER
+   ============================================== */
+footer {
+  background: var(--cream);
+  border-top: 1px solid rgba(44,24,16,0.08);
+  padding: 3.5rem 3rem 2.5rem;
+}
+
+.footer-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1.5rem;
+}
+
+.footer-presented {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--sage);
+  margin-bottom: 0.3rem;
+}
+
+.footer-note {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--ink);
+}
+
+.footer-credits {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--sage);
+  text-align: right;
+  line-height: 1.8;
+}
+
+.footer-credits a { color: var(--sage); }
+.footer-credits a:hover { color: var(--blue); }
+
+.footer-url {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: rgba(44,24,16,0.15);
+  text-align: center;
+  margin-top: 2rem;
+  letter-spacing: 0.08em;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 600px) {
+  footer { padding: 2.5rem 1.5rem 2rem; }
+  .footer-inner { flex-direction: column; align-items: flex-start; }
+  .footer-credits { text-align: left; }
+}
+
+/* ==============================================
+   SCROLL REVEAL
+   ============================================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.75s ease, transform 0.75s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.reveal-stagger.visible > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-stagger.visible > *:nth-child(1) { transition-delay: 0s; }
+.reveal-stagger.visible > *:nth-child(2) { transition-delay: 0.06s; }
+.reveal-stagger.visible > *:nth-child(3) { transition-delay: 0.12s; }
+.reveal-stagger.visible > *:nth-child(4) { transition-delay: 0.18s; }
+.reveal-stagger.visible > *:nth-child(5) { transition-delay: 0.24s; }
+.reveal-stagger.visible > *:nth-child(6) { transition-delay: 0.30s; }
+</style>
+</head>
+<body>
+
+<!-- Scroll Progress -->
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- Nav -->
+<nav class="nav-bar">
+  <div class="nav-url"><b>samweber</b>.fun/live/cherry-knolls</div>
+  <div class="nav-links">
+    <a href="#listen">listen</a>
+    <a href="#about">about</a>
+    <a href="#show">the show</a>
+    <a href="#tickets">tickets</a>
+  </div>
+</nav>
+
+<!-- Mobile sticky CTA -->
+<a class="mobile-cta" id="mobileCta" href="#tickets">Get Tickets ↓</a>
+
+<!-- ==============================================
+     HERO
+     ============================================== -->
+<section class="hero" id="top">
+  <div class="hero-content">
+    <div class="hero-date reveal">04 . 16 . 26</div>
+    <h1 class="hero-name"><span>Sam </span><span>Weber</span></h1>
+    <div class="hero-url" id="heroUrl"><span class="cursor"></span></div>
+    <p class="hero-tagline">A songwriter you haven't heard yet, playing three feet away.</p>
+  </div>
+  <div class="hero-photo-wrap">
+    <div class="hero-photo">
+      <div class="photo-framed">
+        <picture>
+          <source srcset="img/sam-01-large.jpg" media="(min-width: 900px)">
+          <source srcset="img/sam-01-medium.jpg" media="(min-width: 500px)">
+          <img src="img/sam-01-small.jpg" alt="Sam Weber crouching against a graffiti wall" loading="eager">
+        </picture>
+      </div>
+      <div class="photo-credit">Photo: Luke Anderson</div>
+    </div>
+  </div>
+</section>
+
+<!-- Halftone Divider -->
+<div class="halftone-divider"></div>
+
+<!-- Digital Prairie V1 is now a background on the Hero section -->
+<!-- Digital Prairie V5 is now a background on the Tickets section -->
+
+<!-- ==============================================
+     LISTENING ROOM
+     ============================================== -->
+<!-- Listening Room: Header (standalone) -->
+<div class="lr-header" id="listen">
+  <div class="section-label reveal">the listening room</div>
+  <div class="lr-title reveal">You probably haven't heard of <span style="white-space:nowrap">Sam Weber.</span></div>
+  <div class="lr-subtitle reveal">That's about to change.</div>
+  <div class="lr-cta reveal">Press play.</div>
+</div>
+
+<!-- Listening Room: Player (thumbnails + video, zero gaps) -->
+<section class="listening-room">
+  <div class="lr-player-grid">
+    <div class="tracklist" id="tracklist">
+      <!--
+        ============================================
+        YOUTUBE VIDEOS — SWAP VIDEO IDs HERE
+        ============================================
+        Change data-id to the YouTube video ID (the part after v= in the URL).
+        Change the .track-name text to the video/song title.
+        Example: youtube.com/watch?v=ABC123 → data-id="ABC123"
+      -->
+      <div class="track active" data-id="NecfSdm2rXM">
+        <div class="track-thumb"><img src="https://img.youtube.com/vi/NecfSdm2rXM/mqdefault.jpg" alt="" loading="lazy"></div>
+        <div class="track-info">
+          <span class="track-dot"></span>
+          <span class="track-num">01</span>
+          <span class="track-name">Void (live on eTown)</span>
+          <span class="track-leaders"></span>
+          <span class="track-duration">now playing</span>
+        </div>
+      </div>
+      <div class="track" data-id="ZbFwHsLYrJs">
+        <div class="track-thumb"><img src="https://img.youtube.com/vi/ZbFwHsLYrJs/mqdefault.jpg" alt="" loading="lazy"></div>
+        <div class="track-info">
+          <span class="track-dot"></span>
+          <span class="track-num">02</span>
+          <span class="track-name">Staring Out Windows</span>
+          <span class="track-leaders"></span>
+          <span class="track-duration">4:22</span>
+        </div>
+      </div>
+      <div class="track" data-id="OQSwliJRxo8">
+        <div class="track-thumb"><img src="https://img.youtube.com/vi/OQSwliJRxo8/mqdefault.jpg" alt="" loading="lazy"></div>
+        <div class="track-info">
+          <span class="track-dot"></span>
+          <span class="track-num">03</span>
+          <span class="track-name">Oh My (Live)</span>
+          <span class="track-leaders"></span>
+          <span class="track-duration">5:31</span>
+        </div>
+      </div>
+      <div class="track" data-id="Ayv_6Gr2M1o">
+        <div class="track-thumb"><img src="https://img.youtube.com/vi/Ayv_6Gr2M1o/mqdefault.jpg" alt="" loading="lazy"></div>
+        <div class="track-info">
+          <span class="track-dot"></span>
+          <span class="track-num">04</span>
+          <span class="track-name">The Track (Live)</span>
+          <span class="track-leaders"></span>
+          <span class="track-duration">4:48</span>
+        </div>
+      </div>
+      <div class="track" data-id="jHW0HqFkiOU">
+        <div class="track-thumb"><img src="https://img.youtube.com/vi/jHW0HqFkiOU/mqdefault.jpg" alt="" loading="lazy"></div>
+        <div class="track-info">
+          <span class="track-dot"></span>
+          <span class="track-num">05</span>
+          <span class="track-name">I'm Getting Ready (Cover)</span>
+          <span class="track-leaders"></span>
+          <span class="track-duration">3:55</span>
+        </div>
+      </div>
+      <div class="track" data-id="U22WpNNJ2mI">
+        <div class="track-thumb"><img src="https://img.youtube.com/vi/U22WpNNJ2mI/mqdefault.jpg" alt="" loading="lazy"></div>
+        <div class="track-info">
+          <span class="track-dot"></span>
+          <span class="track-num">06</span>
+          <span class="track-name">Live with Digital Velvet</span>
+          <span class="track-leaders"></span>
+          <span class="track-duration">28:14</span>
+        </div>
+      </div>
+      <div class="track" data-id="Y5F-UBriQmM">
+        <div class="track-thumb"><img src="https://img.youtube.com/vi/Y5F-UBriQmM/mqdefault.jpg" alt="" loading="lazy"></div>
+        <div class="track-info">
+          <span class="track-dot"></span>
+          <span class="track-num">07</span>
+          <span class="track-name">eTown Interview</span>
+          <span class="track-leaders"></span>
+          <span class="track-duration">6:42</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="yt-player" id="ytPlayerContainer">
+      <div id="ytPlayerTarget"></div>
+      <div class="yt-placeholder" id="ytPlaceholder">
+        <div class="play-circle">&#9654;</div>
+        <span>select a track</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==============================================
+     THE FILE ON SAM WEBER
+     ============================================== -->
+<section class="the-file" id="about">
+  <div class="section-label reveal">the file on sam weber</div>
+
+  <blockquote class="pullquote reveal">
+    "His songcraft is only rivaled by his musicianship, both of which are disciplined enough to stun and feel effortless."
+  </blockquote>
+
+  <div class="file-grid">
+    <div class="file-photo-col">
+      <div class="file-photo photo-framed reveal">
+        <picture>
+          <source srcset="img/sam-03-large.jpg" media="(min-width: 900px)">
+          <source srcset="img/sam-03-medium.jpg" media="(min-width: 500px)">
+          <img src="img/sam-03-small.jpg" alt="Sam Weber" loading="lazy">
+        </picture>
+      </div>
+      <div class="spotify-embed reveal">
+        <iframe src="https://open.spotify.com/embed/playlist/3bosTYmsxQClkzWTmC9Fxq?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      </div>
+    </div>
+    <div class="file-text">
+      <p class="bio-editorial reveal">
+        Sam Weber is a Portland-based songwriter whose reputation precedes him. If you haven't seen him in your town on one of his many extended tours, you might have seen his name on marquees beside <em>Bahamas</em> and <em>Feist</em>, or in liner notes as a songwriter on the next <em>Madison Cunningham</em> record. His songcraft is only rivaled by his musicianship, both of which are disciplined enough to stun and feel effortless.
+      </p>
+
+      <div class="bio-dossier reveal">
+        <strong>Based:</strong> Portland, OR<br>
+        <strong>Active since:</strong> 2013<br>
+        <strong>Discography:</strong> 7 full-length records<br>
+        <strong>Latest LP:</strong> <em>Shape Confused Cowboy Be You</em> (2025)<br>
+        <strong>Shared bills with:</strong> Feist, Bahamas, Anna Tivel<br>
+        <strong>Co-writes with:</strong> Madison Cunningham (Grammy winner)<br>
+        <strong>Studio:</strong> Deus Cowboy (Portland, OR)<br>
+        <strong>Sign:</strong> Scorpio
+      </div>
+
+      <p class="bio-editorial reveal">
+        His relentless output has led to an examination of human existence, eternal in a fragmenting modern world. His latest LP, <em>Shape Confused Cowboy Be You</em>, pushes the boundaries of what it means to be a songwriter in the 21st century. A quiet storm shifting from narrow drum machines to grand sweeping strings.
+      </p>
+
+      <div class="file-links reveal-stagger reveal">
+        <a href="https://www.samweber.fun" target="_blank" rel="noopener">samweber.fun</a>
+        <a href="https://www.instagram.com/samwebermusic/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://play.spotify.com/artist/5S7A3k8YvGhc78LKeqe8gl" target="_blank" rel="noopener">Spotify</a>
+        <a href="https://webermusic.bandcamp.com/album/shape-confused-cowboy-be-you" target="_blank" rel="noopener">Bandcamp</a>
+        <a href="https://www.youtube.com/user/SamWeber12" target="_blank" rel="noopener">YouTube</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Living Room V19 — YOUR room at dusk, performer by the piano in the corner, audience, candles -->
+<div class="ai-scene" id="living-room">
+  <picture>
+    <source srcset="img/living-room-v19-large.jpg" media="(min-width: 900px)">
+    <source srcset="img/living-room-v19-medium.jpg" media="(min-width: 500px)">
+    <img src="img/living-room-v19-small.jpg" alt="A house concert at dusk — performer by the piano, audience seated in candlelight" loading="lazy">
+  </picture>
+</div>
+
+<!-- ==============================================
+     THE SHOW — BROADSHEET
+     ============================================== -->
+<section class="the-show" id="show">
+  <div class="section-label reveal" style="align-self: flex-start;">the show</div>
+
+  <div class="broadsheet reveal">
+    <div class="broadsheet-title">A Living Room Concert</div>
+    <div class="broadsheet-date">April 16, 2026</div>
+
+    <div class="broadsheet-details">
+      <span class="dl">When:</span> April 16, 2026 — Doors 6:15 — Show 7:00<br>
+      <span class="dl">Where:</span> A living room in Cherry Knolls, Centennial CO<br>
+      <span class="dl">Capacity:</span> ~35 human beings<br>
+            <span class="dl">Provisions:</span> BYOB — we'll have water and snacks<br>
+      <span class="dl">Address:</span> Revealed after ticket purchase
+    </div>
+
+    <div class="broadsheet-footer-note">
+      This is someone's actual house. Be cool. Be present.<br>
+      Phones away during the set is appreciated — you're adults.
+    </div>
+  </div>
+</section>
+
+<!-- ==============================================
+     TICKETS — GET IN THE ROOM
+     ============================================== -->
+<section class="tickets" id="tickets">
+  <div class="tickets-inner">
+    <div class="section-label reveal">get in</div>
+
+    <h2 class="tickets-heading reveal">Get in the room.</h2>
+
+    <div class="ticket-type-picker reveal">
+      <div class="ticket-type active" data-type="seated" data-amount="30" data-note="Sam%20Weber%204%2F16%20%E2%80%94%20SEATED">
+        <div class="ticket-type-name">Seated</div>
+        <div class="ticket-type-price">$30</div>
+        <div class="ticket-type-suggested">suggested</div>
+        <div class="ticket-type-avail"><span id="seatedAvail">30</span> available</div>
+      </div>
+      <div class="ticket-type" data-type="standing" data-amount="20" data-note="Sam%20Weber%204%2F16%20%E2%80%94%20STANDING">
+        <div class="ticket-type-name">Standing</div>
+        <div class="ticket-type-price">$20</div>
+        <div class="ticket-type-suggested">suggested</div>
+        <div class="ticket-type-avail"><span id="standingAvail">20</span> available</div>
+      </div>
+    </div>
+
+    <p class="tickets-message reveal">
+      Seated gets you a chair up close. Standing room is cheaper and equally electric. More if you can — you're putting gas money directly in an independent artist's tank. Less if you need to. No judgment. Just come.
+    </p>
+
+    <div class="ticket-stub reveal">
+      <div class="ticket-stub-label">Pay via Venmo</div>
+      <div class="ticket-stub-body">
+        <div class="ticket-stub-left">
+          <div class="ticket-stub-handle">
+            <a href="https://venmo.com/u/ParkerFleming?txn=pay&amount=30&note=Sam%20Weber%204%2F16%20%E2%80%94%20SEATED" id="venmoLink" target="_blank" rel="noopener">@ParkerFleming</a>
+            <button class="copy-btn" id="copyBtn">copy</button>
+          </div>
+          <p class="ticket-stub-note" id="ticketNote">
+            In the Venmo note, include: <code>Your Name — Sam Weber 4/16 — SEATED — # of tickets</code>
+          </p>
+        </div>
+        <div class="ticket-stub-qr">
+          <a href="https://venmo.com/u/ParkerFleming?txn=pay&amount=30&note=Sam%20Weber%204%2F16%20%E2%80%94%20SEATED" id="venmoQrLink" target="_blank" rel="noopener">
+            <img src="img/venmo-qr.jpg" alt="Scan to pay via Venmo">
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <p class="tickets-after reveal">
+      After you Venmo, you'll get a text or email with the address and any last details. If you don't hear back within 24 hours, DM or text Parker.
+    </p>
+  </div>
+</section>
+
+<!-- Photo Break -->
+<div class="photo-break">
+  <picture>
+    <source srcset="img/sam-02-large.jpg" media="(min-width: 900px)">
+    <source srcset="img/sam-02-medium.jpg" media="(min-width: 500px)">
+    <img src="img/sam-02-small.jpg" alt="Sam Weber" loading="lazy">
+  </picture>
+  <div class="photo-credit">Photo: Luke Anderson</div>
+</div>
+
+<!-- ==============================================
+     FOOTER
+     ============================================== -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-presented">Presented by The Fleming Family</div>
+      <div class="footer-note">Not a venue. Not a brand. Just good music in a living room.</div>
+    </div>
+    <div class="footer-credits">
+      Photos by Luke Anderson<br>
+      <a href="https://www.instagram.com/imlukeanderson/" target="_blank" rel="noopener">@imlukeanderson</a>
+    </div>
+  </div>
+  <div class="footer-url">living-room-concert.fun</div>
+</footer>
+
+<!-- ==============================================
+     JS
+     ============================================== -->
+<script>
+// ---- TYPEWRITER EFFECT for hero URL ----
+(function() {
+  var target = document.getElementById('heroUrl');
+  var text = 'live://cherry-knolls/living-room';
+  var i = 0;
+  var cursor = target.querySelector('.cursor');
+
+  function type() {
+    if (i < text.length) {
+      target.insertBefore(document.createTextNode(text.charAt(i)), cursor);
+      i++;
+      setTimeout(type, 45 + Math.random() * 40);
+    }
+  }
+
+  // Start after hero name animation completes
+  setTimeout(type, 800);
+})();
+
+// ---- SCROLL PROGRESS BAR ----
+(function() {
+  var bar = document.getElementById('scrollProgress');
+  window.addEventListener('scroll', function() {
+    var h = document.documentElement;
+    var pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    bar.style.width = pct + '%';
+  }, { passive: true });
+})();
+
+// ---- MOBILE CTA PILL ----
+(function() {
+  var cta = document.getElementById('mobileCta');
+  var hero = document.querySelector('.hero');
+  if (!cta || !hero) return;
+
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        cta.classList.remove('visible');
+      } else {
+        cta.classList.add('visible');
+      }
+    });
+  }, { threshold: 0 });
+
+  observer.observe(hero);
+})();
+
+// ---- YOUTUBE PLAYER (IFrame API) ----
+(function() {
+  var tracklist = document.getElementById('tracklist');
+  var container = document.getElementById('ytPlayerContainer');
+  var placeholder = document.getElementById('ytPlaceholder');
+  var ytPlayer = null;
+  var playerReady = false;
+  var pendingVideoId = null;
+
+  // Load the YouTube IFrame API
+  var tag = document.createElement('script');
+  tag.src = 'https://www.youtube.com/iframe_api';
+  var firstScript = document.getElementsByTagName('script')[0];
+  firstScript.parentNode.insertBefore(tag, firstScript);
+
+  // Pre-create player on API load so it's instantly ready on first tap
+  window.onYouTubeIframeAPIReady = function() {
+    ytPlayer = new YT.Player('ytPlayerTarget', {
+      playerVars: {
+        rel: 0,
+        playsinline: 1
+      },
+      events: {
+        onReady: function() {
+          playerReady = true;
+          if (pendingVideoId) {
+            placeholder.style.display = 'none';
+            ytPlayer.loadVideoById(pendingVideoId);
+            pendingVideoId = null;
+          }
+        }
+      }
+    });
+  };
+
+  function loadVideo(videoId) {
+    if (placeholder) placeholder.style.display = 'none';
+
+    if (playerReady) {
+      ytPlayer.loadVideoById(videoId);
+    } else {
+      // API or player not ready yet — queue it
+      pendingVideoId = videoId;
+    }
+  }
+
+  tracklist.addEventListener('click', function(e) {
+    var track = e.target.closest('.track');
+    if (!track) return;
+    var id = track.dataset.id;
+    if (!id) return;
+
+    // Update active states
+    tracklist.querySelectorAll('.track').forEach(function(t) {
+      t.classList.remove('active');
+      var durEl = t.querySelector('.track-duration');
+      if (durEl.dataset.dur) durEl.textContent = durEl.dataset.dur;
+    });
+    track.classList.add('active');
+
+    // Store original duration, show "now playing"
+    var dur = track.querySelector('.track-duration');
+    if (!dur.dataset.dur) dur.dataset.dur = dur.textContent;
+    dur.textContent = 'now playing';
+
+    loadVideo(id);
+  });
+
+  // First click on placeholder also starts first track
+  if (placeholder) {
+    placeholder.addEventListener('click', function() {
+      var first = tracklist.querySelector('.track');
+      if (first) first.click();
+    });
+  }
+})();
+
+// ---- COPY VENMO ----
+(function() {
+  var btn = document.getElementById('copyBtn');
+  if (!btn) return;
+  btn.addEventListener('click', function() {
+    navigator.clipboard.writeText('@ParkerFleming').then(function() {
+      btn.textContent = 'copied ✓';
+      btn.classList.add('copied');
+      setTimeout(function() {
+        btn.textContent = 'copy';
+        btn.classList.remove('copied');
+      }, 2000);
+    });
+  });
+})();
+
+// ---- TICKET TYPE PICKER ----
+(function() {
+  var cards = document.querySelectorAll('.ticket-type');
+  var venmoLink = document.getElementById('venmoLink');
+  var qrLink = document.getElementById('venmoQrLink');
+  var noteEl = document.getElementById('ticketNote');
+  var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+  function updateLinks(card) {
+    var amount = card.dataset.amount;
+    var note = card.dataset.note;
+    var type = card.dataset.type.toUpperCase();
+    var webUrl = 'https://venmo.com/u/ParkerFleming?txn=pay&amount=' + amount + '&note=' + note;
+    var appUrl = 'venmo://paycharge?txn=pay&recipients=ParkerFleming&amount=' + amount + '&note=' + decodeURIComponent(note);
+
+    venmoLink.href = isMobile ? appUrl : webUrl;
+    qrLink.href = webUrl;
+    noteEl.innerHTML = 'In the Venmo note, include: <code>Your Name \u2014 Sam Weber 4/16 \u2014 ' + type + ' \u2014 # of tickets</code>';
+  }
+
+  cards.forEach(function(card) {
+    card.addEventListener('click', function() {
+      cards.forEach(function(c) { c.classList.remove('active'); });
+      card.classList.add('active');
+      updateLinks(card);
+    });
+  });
+
+  // Initialize with the default active card
+  var active = document.querySelector('.ticket-type.active');
+  if (active) updateLinks(active);
+})();
+
+// ---- SCROLL REVEAL ----
+(function() {
+  var reveals = document.querySelectorAll('.reveal');
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
+  reveals.forEach(function(el) { obs.observe(el); });
+})();
+</script>
+
+</body>
+</html>
