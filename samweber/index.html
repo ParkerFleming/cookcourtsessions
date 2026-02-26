@@ -1839,7 +1839,7 @@ footer {
         <div class="ticket-stub-body">
           <div class="ticket-stub-left">
             <div class="ticket-stub-handle">
-              <a href="https://venmo.com/u/ParkerFleming?txn=pay&amount=30&note=Sam%20Weber%204%2F16%20%E2%80%94%20SEATED" id="venmoLink" target="_blank" rel="noopener">@ParkerFleming</a>
+              <a href="https://venmo.com/ParkerFleming?txn=pay&amount=30&note=Sam%20Weber%204%2F16%20%E2%80%94%20SEATED" id="venmoLink" target="_blank" rel="noopener">@ParkerFleming</a>
               <button class="copy-btn" id="copyBtn">copy</button>
             </div>
             <p class="ticket-stub-note" id="ticketNote">
@@ -1847,7 +1847,7 @@ footer {
             </p>
           </div>
           <div class="ticket-stub-qr">
-            <a href="https://venmo.com/u/ParkerFleming?txn=pay&amount=30&note=Sam%20Weber%204%2F16%20%E2%80%94%20SEATED" id="venmoQrLink" target="_blank" rel="noopener">
+            <a href="https://venmo.com/ParkerFleming?txn=pay&amount=30&note=Sam%20Weber%204%2F16%20%E2%80%94%20SEATED" id="venmoQrLink" target="_blank" rel="noopener">
               <img src="img/venmo-qr.jpg" alt="Scan to pay via Venmo">
             </a>
           </div>
@@ -2092,8 +2092,8 @@ footer {
     var type = getType();
     var noteText = 'Sam Weber 4/16 \u2014 ' + type + ' \u00d7 ' + qty;
     var encodedNote = encodeURIComponent(noteText);
-    var webUrl = 'https://venmo.com/u/ParkerFleming?txn=pay&amount=' + total + '&note=' + encodedNote;
-    var appUrl = 'venmo://paycharge?txn=pay&recipients=ParkerFleming&amount=' + total + '&note=' + noteText;
+    var webUrl = 'https://venmo.com/ParkerFleming?txn=pay&amount=' + total + '&note=' + encodedNote;
+    var appUrl = 'venmo://paycharge?txn=pay&recipients=ParkerFleming&amount=' + total + '&note=' + encodedNote;
 
     venmoLink.href = isMobile ? appUrl : webUrl;
     qrLink.href = webUrl;
