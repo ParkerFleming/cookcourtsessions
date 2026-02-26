@@ -923,6 +923,34 @@ img { display: block; max-width: 100%; }
   align-items: center;
 }
 
+.show-columns {
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+  width: 100%;
+  max-width: 960px;
+}
+
+.show-columns .broadsheet {
+  flex: 1;
+  min-width: 0;
+}
+
+.show-columns .ai-accent-frame {
+  flex-shrink: 0;
+  width: 260px;
+}
+
+@media (max-width: 768px) {
+  .show-columns {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .show-columns .ai-accent-frame {
+    width: 200px;
+  }
+}
+
 .broadsheet {
   max-width: 620px;
   width: 100%;
@@ -1809,36 +1837,35 @@ footer {
 <section class="the-show" id="show">
   <div class="section-label reveal" style="align-self: flex-start;">the show</div>
 
-  <div class="broadsheet reveal">
-    <div class="broadsheet-title">A Living Room Concert</div>
-    <div class="broadsheet-date">April 16, 2026</div>
+  <div class="show-columns reveal">
+    <div class="broadsheet">
+      <div class="broadsheet-title">A Living Room Concert</div>
+      <div class="broadsheet-date">April 16, 2026</div>
 
-    <div class="broadsheet-details">
-      <span class="dl">When:</span> April 16, 2026 — Doors 6:15 — Show 7:00<br>
-      <span class="dl">Where:</span> A living room in Cherry Knolls, Centennial CO<br>
-      <span class="dl">Capacity:</span> ~50 human beings<br>
-            <span class="dl">Provisions:</span> BYOB — we'll have water and snacks<br>
-      <span class="dl">Address:</span> Revealed after ticket purchase
+      <div class="broadsheet-details">
+        <span class="dl">When:</span> April 16, 2026 — Doors 6:15 — Show 7:00<br>
+        <span class="dl">Where:</span> A living room in Cherry Knolls, Centennial CO<br>
+        <span class="dl">Capacity:</span> ~50 human beings<br>
+        <span class="dl">Provisions:</span> BYOB — we'll have water and snacks<br>
+        <span class="dl">Address:</span> Revealed after ticket purchase
+      </div>
+
+      <div class="broadsheet-footer-note">
+        This is someone's actual house. Be cool. Be present.<br>
+        Phones away during the set is appreciated — you're adults.
+      </div>
     </div>
 
-    <div class="broadsheet-footer-note">
-      This is someone's actual house. Be cool. Be present.<br>
-      Phones away during the set is appreciated — you're adults.
+    <div class="ai-accent-frame">
+      <picture>
+        <source srcset="img/cowboys-desktop-large.jpg" media="(min-width: 900px)">
+        <source srcset="img/cowboys-desktop-medium.jpg" media="(min-width: 600px)">
+        <img src="img/cowboys-desktop-small.jpg" alt="Cowboys desktop" loading="lazy">
+      </picture>
+      <div class="ai-accent-caption">shape confused cowboy be you</div>
     </div>
   </div>
 </section>
-
-<!-- Cowboys Desktop accent -->
-<div class="ai-accent">
-  <div class="ai-accent-frame">
-    <picture>
-      <source srcset="img/cowboys-desktop-large.jpg" media="(min-width: 900px)">
-      <source srcset="img/cowboys-desktop-medium.jpg" media="(min-width: 600px)">
-      <img src="img/cowboys-desktop-small.jpg" alt="Cowboys desktop" loading="lazy">
-    </picture>
-    <div class="ai-accent-caption">shape confused cowboy be you</div>
-  </div>
-</div>
 
 <!-- ==============================================
      TICKETS — GET IN THE ROOM
