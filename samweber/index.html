@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sam Weber — Live in a Living Room — 04.16.26</title>
-<meta name="description" content="Sam Weber. House concert. Cherry Knolls, Centennial CO. April 16, 2026. ~35 seats. That's it.">
+<meta name="description" content="Sam Weber. House concert. Cherry Knolls, Centennial CO. April 16, 2026. ~50 seats. That's it.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,500;1,9..144,700;1,9..144,900&family=Inconsolata:wght@300;400;500;600;700&family=Literata:ital,opsz,wght@0,7..72,300;0,7..72,400;0,7..72,500;1,7..72,300;1,7..72,400&display=swap" rel="stylesheet">
@@ -1050,10 +1050,10 @@ img { display: block; max-width: 100%; }
 
 /* Text readability over prairie background — lift text with subtle shadow */
 .tickets-heading,
-.tickets-message,
 .tickets-suggested,
 .tickets-after,
 .ticket-type-picker,
+.ticket-qty-step,
 .section-label {
   text-shadow: 0 0 20px var(--parchment), 0 0 40px var(--parchment), 0 0 60px var(--parchment);
 }
@@ -1153,6 +1153,84 @@ img { display: block; max-width: 100%; }
   font-weight: 500;
 }
 
+/* Progressive ticket steps — hidden until revealed */
+.ticket-step {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.4s ease, max-height 0.5s ease;
+  pointer-events: none;
+}
+
+.ticket-step.visible {
+  opacity: 1;
+  max-height: 500px;
+  pointer-events: auto;
+}
+
+/* Quantity selector */
+.ticket-qty-step {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.ticket-qty-label {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.ticket-qty-picker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+}
+
+.ticket-qty-picker button {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--cream);
+  background: var(--ink);
+  border: 2px solid var(--ink);
+  width: 2.5rem;
+  height: 2.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.ticket-qty-picker button:hover {
+  background: var(--sienna);
+  border-color: var(--sienna);
+}
+
+.ticket-qty-picker span {
+  font-family: var(--font-mono);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--ink);
+  min-width: 3rem;
+  text-align: center;
+}
+
+.ticket-qty-total {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  color: var(--sage);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
 .tickets-heading {
   font-family: var(--font-display);
   font-size: clamp(2.8rem, 7vw, 5rem);
@@ -1173,15 +1251,6 @@ img { display: block; max-width: 100%; }
 .tickets-suggested strong {
   color: var(--ink);
   font-weight: 600;
-}
-
-.tickets-message {
-  font-family: var(--font-body);
-  font-size: 1.05rem;
-  line-height: 1.85;
-  color: var(--ink);
-  margin-bottom: 2.5rem;
-  max-width: 600px;
 }
 
 /* Ticket stub — analog concert ticket feel */
@@ -1718,7 +1787,7 @@ footer {
     <div class="broadsheet-details">
       <span class="dl">When:</span> April 16, 2026 — Doors 6:15 — Show 7:00<br>
       <span class="dl">Where:</span> A living room in Cherry Knolls, Centennial CO<br>
-      <span class="dl">Capacity:</span> ~35 human beings<br>
+      <span class="dl">Capacity:</span> ~50 human beings<br>
             <span class="dl">Provisions:</span> BYOB — we'll have water and snacks<br>
       <span class="dl">Address:</span> Revealed after ticket purchase
     </div>
@@ -1740,13 +1809,13 @@ footer {
     <h2 class="tickets-heading reveal">Get in the room.</h2>
 
     <div class="ticket-type-picker reveal">
-      <div class="ticket-type active" data-type="seated" data-amount="30" data-note="Sam%20Weber%204%2F16%20%E2%80%94%20SEATED">
+      <div class="ticket-type" data-type="seated" data-amount="30">
         <div class="ticket-type-name">Seated</div>
         <div class="ticket-type-price">$30</div>
         <div class="ticket-type-suggested">suggested</div>
         <div class="ticket-type-avail"><span id="seatedAvail">30</span> available</div>
       </div>
-      <div class="ticket-type" data-type="standing" data-amount="20" data-note="Sam%20Weber%204%2F16%20%E2%80%94%20STANDING">
+      <div class="ticket-type" data-type="standing" data-amount="20">
         <div class="ticket-type-name">Standing</div>
         <div class="ticket-type-price">$20</div>
         <div class="ticket-type-suggested">suggested</div>
@@ -1754,33 +1823,41 @@ footer {
       </div>
     </div>
 
-    <p class="tickets-message reveal">
-      Seated gets you a chair up close. Standing room is cheaper and equally electric. More if you can — you're putting gas money directly in an independent artist's tank. Less if you need to. No judgment. Just come.
-    </p>
-
-    <div class="ticket-stub reveal">
-      <div class="ticket-stub-label">Pay via Venmo</div>
-      <div class="ticket-stub-body">
-        <div class="ticket-stub-left">
-          <div class="ticket-stub-handle">
-            <a href="https://venmo.com/u/ParkerFleming?txn=pay&amount=30&note=Sam%20Weber%204%2F16%20%E2%80%94%20SEATED" id="venmoLink" target="_blank" rel="noopener">@ParkerFleming</a>
-            <button class="copy-btn" id="copyBtn">copy</button>
-          </div>
-          <p class="ticket-stub-note" id="ticketNote">
-            In the Venmo note, include: <code>Your Name — Sam Weber 4/16 — SEATED — # of tickets</code>
-          </p>
-        </div>
-        <div class="ticket-stub-qr">
-          <a href="https://venmo.com/u/ParkerFleming?txn=pay&amount=30&note=Sam%20Weber%204%2F16%20%E2%80%94%20SEATED" id="venmoQrLink" target="_blank" rel="noopener">
-            <img src="img/venmo-qr.jpg" alt="Scan to pay via Venmo">
-          </a>
-        </div>
+    <div class="ticket-step ticket-qty-step" id="qtyStep">
+      <div class="ticket-qty-label">How many?</div>
+      <div class="ticket-qty-picker">
+        <button id="qtyMinus" aria-label="Decrease quantity">&minus;</button>
+        <span id="ticketQty">1</span>
+        <button id="qtyPlus" aria-label="Increase quantity">+</button>
       </div>
+      <div class="ticket-qty-total" id="qtyTotal">1 &times; $30 = $30</div>
     </div>
 
-    <p class="tickets-after reveal">
-      After you Venmo, you'll get a text or email with the address and any last details. If you don't hear back within 24 hours, DM or text Parker.
-    </p>
+    <div class="ticket-step" id="payStep">
+      <div class="ticket-stub">
+        <div class="ticket-stub-label">Pay via Venmo</div>
+        <div class="ticket-stub-body">
+          <div class="ticket-stub-left">
+            <div class="ticket-stub-handle">
+              <a href="https://venmo.com/u/ParkerFleming?txn=pay&amount=30&note=Sam%20Weber%204%2F16%20%E2%80%94%20SEATED" id="venmoLink" target="_blank" rel="noopener">@ParkerFleming</a>
+              <button class="copy-btn" id="copyBtn">copy</button>
+            </div>
+            <p class="ticket-stub-note" id="ticketNote">
+              In the Venmo note, include: <code>Your Name — Sam Weber 4/16 — SEATED × 1</code>
+            </p>
+          </div>
+          <div class="ticket-stub-qr">
+            <a href="https://venmo.com/u/ParkerFleming?txn=pay&amount=30&note=Sam%20Weber%204%2F16%20%E2%80%94%20SEATED" id="venmoQrLink" target="_blank" rel="noopener">
+              <img src="img/venmo-qr.jpg" alt="Scan to pay via Venmo">
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <p class="tickets-after">
+        After you Venmo, you'll get a text or email with the address and any last details. If you don't hear back within 24 hours, DM or text Parker.
+      </p>
+    </div>
   </div>
 </section>
 
@@ -1848,19 +1925,37 @@ footer {
 (function() {
   var cta = document.getElementById('mobileCta');
   var hero = document.querySelector('.hero');
-  if (!cta || !hero) return;
+  var tickets = document.getElementById('tickets');
+  if (!cta || !hero || !tickets) return;
 
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        cta.classList.remove('visible');
-      } else {
-        cta.classList.add('visible');
-      }
-    });
-  }, { threshold: 0 });
+  var heroVisible = true;
+  var ticketsVisible = false;
 
-  observer.observe(hero);
+  function update() {
+    if (heroVisible || ticketsVisible) {
+      cta.classList.remove('visible');
+    } else {
+      cta.classList.add('visible');
+    }
+
+    // Flip arrow when tickets section is above viewport
+    var rect = tickets.getBoundingClientRect();
+    if (rect.bottom < 0) {
+      cta.textContent = 'Get Tickets \u2191';
+    } else {
+      cta.textContent = 'Get Tickets \u2193';
+    }
+  }
+
+  new IntersectionObserver(function(entries) {
+    heroVisible = entries[0].isIntersecting;
+    update();
+  }, { threshold: 0 }).observe(hero);
+
+  new IntersectionObserver(function(entries) {
+    ticketsVisible = entries[0].isIntersecting;
+    update();
+  }, { threshold: 0 }).observe(tickets);
 })();
 
 // ---- YOUTUBE PLAYER (IFrame API) ----
@@ -1956,37 +2051,97 @@ footer {
   });
 })();
 
-// ---- TICKET TYPE PICKER ----
+// ---- PROGRESSIVE TICKET PICKER ----
 (function() {
   var cards = document.querySelectorAll('.ticket-type');
+  var qtyStep = document.getElementById('qtyStep');
+  var payStep = document.getElementById('payStep');
+  var qtyDisplay = document.getElementById('ticketQty');
+  var qtyTotal = document.getElementById('qtyTotal');
+  var minusBtn = document.getElementById('qtyMinus');
+  var plusBtn = document.getElementById('qtyPlus');
   var venmoLink = document.getElementById('venmoLink');
   var qrLink = document.getElementById('venmoQrLink');
   var noteEl = document.getElementById('ticketNote');
   var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-  function updateLinks(card) {
-    var amount = card.dataset.amount;
-    var note = card.dataset.note;
-    var type = card.dataset.type.toUpperCase();
-    var webUrl = 'https://venmo.com/u/ParkerFleming?txn=pay&amount=' + amount + '&note=' + note;
-    var appUrl = 'venmo://paycharge?txn=pay&recipients=ParkerFleming&amount=' + amount + '&note=' + decodeURIComponent(note);
+  var qty = 1;
+  var activeCard = null;
+
+  function getPrice() {
+    return activeCard ? parseInt(activeCard.dataset.amount, 10) : 30;
+  }
+
+  function getType() {
+    return activeCard ? activeCard.dataset.type.toUpperCase() : 'SEATED';
+  }
+
+  function updateTotal() {
+    var price = getPrice();
+    var total = price * qty;
+    qtyTotal.innerHTML = qty + ' &times; $' + price + ' = $' + total;
+  }
+
+  function updatePayment() {
+    var price = getPrice();
+    var total = price * qty;
+    var type = getType();
+    var noteText = 'Sam Weber 4/16 \u2014 ' + type + ' \u00d7 ' + qty;
+    var encodedNote = encodeURIComponent(noteText);
+    var webUrl = 'https://venmo.com/u/ParkerFleming?txn=pay&amount=' + total + '&note=' + encodedNote;
+    var appUrl = 'venmo://paycharge?txn=pay&recipients=ParkerFleming&amount=' + total + '&note=' + noteText;
 
     venmoLink.href = isMobile ? appUrl : webUrl;
     qrLink.href = webUrl;
-    noteEl.innerHTML = 'In the Venmo note, include: <code>Your Name \u2014 Sam Weber 4/16 \u2014 ' + type + ' \u2014 # of tickets</code>';
+    noteEl.innerHTML = 'In the Venmo note, include: <code>Your Name \u2014 Sam Weber 4/16 \u2014 ' + type + ' &times; ' + qty + '</code>';
   }
 
+  // Step 1: Pick type → reveal qty
   cards.forEach(function(card) {
     card.addEventListener('click', function() {
       cards.forEach(function(c) { c.classList.remove('active'); });
       card.classList.add('active');
-      updateLinks(card);
+      activeCard = card;
+
+      // Reset qty when switching type
+      qty = 1;
+      qtyDisplay.textContent = '1';
+      updateTotal();
+
+      // Reveal qty step
+      qtyStep.classList.add('visible');
+
+      // Update payment if already visible
+      if (payStep.classList.contains('visible')) {
+        updatePayment();
+      }
     });
   });
 
-  // Initialize with the default active card
-  var active = document.querySelector('.ticket-type.active');
-  if (active) updateLinks(active);
+  // Step 2: Adjust quantity → reveal payment
+  function handleQtyChange() {
+    updateTotal();
+    if (!payStep.classList.contains('visible')) {
+      payStep.classList.add('visible');
+    }
+    updatePayment();
+  }
+
+  minusBtn.addEventListener('click', function() {
+    if (qty > 1) {
+      qty--;
+      qtyDisplay.textContent = qty;
+    }
+    handleQtyChange();
+  });
+
+  plusBtn.addEventListener('click', function() {
+    if (qty < 10) {
+      qty++;
+      qtyDisplay.textContent = qty;
+    }
+    handleQtyChange();
+  });
 })();
 
 // ---- SCROLL REVEAL ----
