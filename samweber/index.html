@@ -1065,7 +1065,7 @@ img { display: block; max-width: 100%; }
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(240, 234, 214, 0.6);
+  background: rgba(240, 234, 214, 0.75);
   z-index: 0;
 }
 .tickets > * { position: relative; z-index: 1; }
@@ -1078,6 +1078,7 @@ img { display: block; max-width: 100%; }
 
 /* Text readability over prairie background — lift text with subtle shadow */
 .tickets-heading,
+.tickets-note,
 .tickets-suggested,
 .tickets-after,
 .ticket-pwyc,
@@ -1137,15 +1138,15 @@ img { display: block; max-width: 100%; }
 
 .ticket-pwyc-hint {
   font-family: var(--font-mono);
-  font-size: 0.88rem;
-  color: rgba(44, 24, 16, 0.5);
+  font-size: 1rem;
+  color: rgba(44, 24, 16, 0.75);
   letter-spacing: 0.04em;
   margin-bottom: 0.75rem;
 }
 
 .ticket-pwyc-avail {
   font-family: var(--font-mono);
-  font-size: 0.92rem;
+  font-size: 1.05rem;
   color: var(--sienna);
   font-weight: 600;
 }
@@ -1176,7 +1177,7 @@ img { display: block; max-width: 100%; }
 
 .ticket-qty-label {
   font-family: var(--font-mono);
-  font-size: 0.82rem;
+  font-size: 0.95rem;
   text-transform: uppercase;
   letter-spacing: 0.15em;
   color: var(--ink);
@@ -1222,9 +1223,9 @@ img { display: block; max-width: 100%; }
 
 .ticket-qty-total {
   font-family: var(--font-mono);
-  font-size: 0.88rem;
-  color: var(--sage);
-  font-weight: 500;
+  font-size: 1rem;
+  color: var(--ink);
+  font-weight: 600;
   letter-spacing: 0.04em;
 }
 
@@ -1240,10 +1241,11 @@ img { display: block; max-width: 100%; }
 
 .tickets-note {
   font-family: var(--font-mono);
-  font-size: 0.88rem;
-  color: rgba(44, 24, 16, 0.55);
+  font-size: 1rem;
+  color: var(--ink);
   margin-bottom: 1.75rem;
   letter-spacing: 0.02em;
+  font-weight: 500;
 }
 
 .tickets-suggested {
@@ -1451,10 +1453,12 @@ img { display: block; max-width: 100%; }
 
 .tickets-no-venmo {
   font-family: var(--font-mono);
-  font-size: 0.85rem;
-  color: rgba(44, 24, 16, 0.55);
+  font-size: 0.92rem;
+  color: rgba(44, 24, 16, 0.7);
   line-height: 1.8;
-  margin-top: 1rem;
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px dashed rgba(44, 24, 16, 0.2);
 }
 
 .tickets-no-venmo a {
@@ -1910,13 +1914,13 @@ footer {
             </a>
           </div>
         </div>
+        <p class="tickets-no-venmo">
+          No Venmo? No worries &mdash; text Parker at <a href="sms:3036617745">303-661-7745</a> to save your seat.
+        </p>
       </div>
 
       <p class="tickets-after">
         After you Venmo, you'll get a text or email with the address and any last details. If you don't hear back within 24 hours, DM or text Parker.
-      </p>
-      <p class="tickets-no-venmo">
-        No Venmo? No worries &mdash; text Parker at <a href="sms:3036617745">303-661-7745</a> to save your seat.
       </p>
     </div>
   </div>
