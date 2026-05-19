@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All Shows — Cook Court Sessions</title>
+<meta name="description" content="Every Cook Court Session — living room concerts in Cherry Knolls, Centennial CO.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,900&family=Inconsolata:wght@300;400;500;600;700&family=Literata:ital,opsz,wght@0,7..72,300;0,7..72,400;1,7..72,300;1,7..72,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --parchment: #F0EAD6;
+  --cream: #FAF7F0;
+  --ink: #2C1810;
+  --blue: #2D5BFF;
+  --sienna: #C45D3E;
+  --gold: #C8A951;
+  --sage: #7A8575;
+  --navy: #0F1A2B;
+  --frame: #E8E0D0;
+
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Literata', Georgia, serif;
+  --font-mono: 'Inconsolata', 'Courier New', monospace;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background: var(--parchment);
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px;
+}
+
+a { color: var(--blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Nav */
+.nav-bar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 0.6rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  background: rgba(240, 234, 214, 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(44, 24, 16, 0.08);
+}
+
+.nav-brand {
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+.nav-brand:hover { text-decoration: none; color: var(--sienna); }
+
+.nav-label {
+  color: rgba(44, 24, 16, 0.45);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+}
+
+/* Page header */
+.page-header {
+  padding: 5rem 3rem 3rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin-bottom: 1.25rem;
+}
+
+.page-title {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 900;
+  font-style: italic;
+  line-height: 0.9;
+  color: var(--ink);
+  margin-bottom: 1.25rem;
+}
+
+.page-subtitle {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(44, 24, 16, 0.65);
+  max-width: 480px;
+}
+
+/* Divider */
+.rule {
+  border: none;
+  border-top: 1px solid rgba(44, 24, 16, 0.1);
+  margin: 0 3rem;
+}
+
+/* Show list */
+.shows-list {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 3rem 3rem 6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.show-row {
+  display: grid;
+  grid-template-columns: 120px 1fr auto;
+  gap: 2rem;
+  align-items: center;
+  padding: 2rem 0;
+  border-bottom: 1px solid rgba(44, 24, 16, 0.08);
+  text-decoration: none;
+  color: var(--ink);
+  transition: background 0.2s;
+  position: relative;
+}
+
+.show-row:first-child {
+  border-top: 1px solid rgba(44, 24, 16, 0.08);
+}
+
+.show-row:hover {
+  text-decoration: none;
+}
+
+.show-row:hover .show-arrow {
+  transform: translateX(4px);
+  color: var(--sienna);
+}
+
+.show-row:hover .show-name {
+  color: var(--sienna);
+}
+
+/* Date column */
+.show-date {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--sage);
+  letter-spacing: 0.06em;
+  line-height: 1.5;
+}
+
+.show-date-num {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 900;
+  font-style: italic;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 0.2rem;
+}
+
+/* Main info */
+.show-info {}
+
+.show-name {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  font-weight: 900;
+  font-style: italic;
+  line-height: 1;
+  margin-bottom: 0.4rem;
+  transition: color 0.2s;
+}
+
+.show-meta {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--sage);
+  letter-spacing: 0.04em;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.show-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.6rem;
+  border: 1px solid rgba(44, 24, 16, 0.15);
+  color: rgba(44, 24, 16, 0.5);
+}
+
+.show-tag.complete {
+  border-color: var(--sage);
+  color: var(--sage);
+}
+
+/* Arrow */
+.show-arrow {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  color: rgba(44, 24, 16, 0.25);
+  transition: transform 0.2s, color 0.2s;
+  flex-shrink: 0;
+}
+
+/* Empty state (for future use) */
+.coming-soon {
+  padding: 3rem 0;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(44, 24, 16, 0.4);
+}
+
+/* Footer */
+footer {
+  background: var(--cream);
+  border-top: 1px solid rgba(44, 24, 16, 0.08);
+  padding: 2.5rem 3rem;
+}
+
+.footer-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-note {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--ink);
+}
+
+.footer-presented {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--sage);
+}
+
+@media (max-width: 600px) {
+  .page-header { padding: 3.5rem 1.5rem 2rem; }
+  .rule { margin: 0 1.5rem; }
+  .shows-list { padding: 2rem 1.5rem 4rem; }
+  .show-row { grid-template-columns: 80px 1fr auto; gap: 1rem; }
+  .show-date-num { font-size: 1.2rem; }
+  footer { padding: 2rem 1.5rem; }
+  .footer-inner { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav-bar">
+  <a class="nav-brand" href="/">Cook Court Sessions</a>
+  <span class="nav-label">archive</span>
+</nav>
+
+<div class="page-header">
+  <div class="section-label">Cook Court Sessions</div>
+  <h1 class="page-title">All<br>Shows</h1>
+  <p class="page-subtitle">Living room concerts in Cherry Knolls, Centennial CO. Small rooms, real music.</p>
+</div>
+
+<hr class="rule">
+
+<div class="shows-list">
+
+  <a class="show-row" href="/shows/paul-spring/">
+    <div class="show-date">
+      <div class="show-date-num">06.27</div>
+      <div>'26</div>
+    </div>
+    <div class="show-info">
+      <div class="show-name">Paul Spring</div>
+      <div class="show-meta">
+        <span>Cherry Knolls, Centennial CO</span>
+        <span class="show-tag">upcoming</span>
+      </div>
+    </div>
+    <div class="show-arrow">→</div>
+  </a>
+
+  <a class="show-row" href="/shows/sam-weber/">
+    <div class="show-date">
+      <div class="show-date-num">04.16</div>
+      <div>'26</div>
+    </div>
+    <div class="show-info">
+      <div class="show-name">Sam Weber</div>
+      <div class="show-meta">
+        <span>Cherry Knolls, Centennial CO</span>
+        <span class="show-tag complete">complete</span>
+      </div>
+    </div>
+    <div class="show-arrow">→</div>
+  </a>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-note">Not a venue. Not a brand. Just good music in a living room.</div>
+    <div class="footer-presented">Presented by The Fleming Family</div>
+  </div>
+</footer>
+
+</body>
+</html>

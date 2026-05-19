@@ -1,0 +1,1849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paul Spring — Live in a Living Room — 06.27.26</title>
+<meta name="description" content="Paul Spring. House concert. Cherry Knolls, Centennial CO. June 27, 2026. ~60 seats. That's it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,500;1,9..144,700;1,9..144,900&family=Inconsolata:wght@300;400;500;600;700&family=Literata:ital,opsz,wght@0,7..72,300;0,7..72,400;0,7..72,500;1,7..72,300;1,7..72,400&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>emailjs.init('VAQuQGmSPBQyiC1fj');</script>
+<style>
+/* ==============================================
+   RIVER CARTOGRAPHY
+   Paul Spring House Concert — Cherry Knolls, CO
+   "folk charts, current drafts"
+   ============================================== */
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --map-cream: #F2EDD7;
+  --paper: #FAF8F2;
+  --ink: #1A1A2E;
+  --river: #1B3A4B;
+  --river-light: #2C5F78;
+  --copper: #B5651D;
+  --copper-light: #D4844A;
+  --moss: #4A6741;
+  --fog: #8A9BA8;
+  --fog-light: #B8C8D0;
+  --frame: #E2D9C4;
+
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Literata', Georgia, serif;
+  --font-mono: 'Inconsolata', 'Courier New', monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--map-cream);
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* Paper grain */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.032;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px;
+}
+
+/* Topo line overlay — subtle map texture */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9997;
+  opacity: 0.018;
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 38px,
+    rgba(27, 58, 75, 0.8) 38px,
+    rgba(27, 58, 75, 0.8) 39px
+  );
+}
+
+/* Scroll progress */
+.scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  width: 0%;
+  background: var(--copper);
+  z-index: 9999;
+  transition: width 0.1s linear;
+}
+
+a { color: var(--river); text-decoration: none; }
+a:hover { text-decoration: underline; }
+img { display: block; max-width: 100%; }
+
+/* ==============================================
+   NAV
+   ============================================== */
+.nav-bar {
+  position: fixed;
+  top: 3px; left: 0; right: 0;
+  z-index: 1000;
+  padding: 0.6rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  background: rgba(242, 237, 215, 0.9);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(27, 58, 75, 0.1);
+}
+
+.nav-url { color: rgba(26, 26, 46, 0.45); letter-spacing: 0.02em; }
+.nav-url b { color: var(--ink); font-weight: 600; }
+
+.nav-links { display: flex; gap: 1.25rem; }
+.nav-links a {
+  color: rgba(26, 26, 46, 0.55);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--ink); text-decoration: none; }
+
+.mobile-cta {
+  display: none;
+  position: fixed;
+  bottom: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1001;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--paper);
+  background: var(--river);
+  border: none;
+  padding: 0.75rem 1.75rem;
+  border-radius: 100px;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(27, 58, 75, 0.35);
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-decoration: none;
+}
+.mobile-cta:hover { transform: translateX(-50%) scale(1.03); box-shadow: 0 6px 24px rgba(27, 58, 75, 0.45); text-decoration: none; }
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .mobile-cta.visible { display: block; }
+}
+
+/* ==============================================
+   HERO
+   ============================================== */
+.hero {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  padding-top: 3rem;
+  position: relative;
+  background: var(--river);
+  overflow: hidden;
+}
+
+/* Topographic map lines as hero background */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(
+      -30deg,
+      transparent,
+      transparent 60px,
+      rgba(242, 237, 215, 0.04) 60px,
+      rgba(242, 237, 215, 0.04) 61px
+    ),
+    repeating-linear-gradient(
+      60deg,
+      transparent,
+      transparent 80px,
+      rgba(242, 237, 215, 0.025) 80px,
+      rgba(242, 237, 215, 0.025) 81px
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero > * { position: relative; z-index: 1; }
+
+@media (max-width: 768px) {
+  .hero {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    min-height: auto;
+    padding-top: 3.5rem;
+  }
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4rem 3rem 4rem 4rem;
+}
+
+.hero-date {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--copper-light);
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeSlideUp 0.6s ease 0.1s forwards;
+}
+
+.hero-name {
+  font-family: var(--font-display);
+  font-size: clamp(4.5rem, 10vw, 9rem);
+  font-weight: 900;
+  font-style: italic;
+  line-height: 0.85;
+  letter-spacing: -0.03em;
+  color: var(--map-cream);
+  margin-bottom: 1.75rem;
+}
+
+.hero-name span {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(35px);
+  animation: heroWordIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.hero-name span:nth-child(1) { animation-delay: 0.2s; }
+.hero-name span:nth-child(2) { animation-delay: 0.4s; }
+
+@keyframes heroWordIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-coords {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  color: rgba(242, 237, 215, 0.35);
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeSlideUp 0.6s ease 0.6s forwards;
+}
+
+.hero-tagline {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 1.6vw, 1.25rem);
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(242, 237, 215, 0.75);
+  line-height: 1.6;
+  max-width: 400px;
+  opacity: 0;
+  animation: fadeSlideUp 0.8s ease 0.8s forwards;
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Hero right — chart/map panel */
+.hero-chart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 3rem 3rem 1rem;
+  position: relative;
+}
+
+.hero-photo {
+  position: relative;
+  max-width: 440px;
+  width: 100%;
+  opacity: 0;
+  animation: fadeIn 1s ease 0.3s forwards;
+}
+
+@keyframes fadeIn { to { opacity: 1; } }
+
+.hero-photo-frame {
+  background: rgba(242, 237, 215, 0.06);
+  border: 1px solid rgba(242, 237, 215, 0.15);
+  padding: 0.6rem;
+}
+
+.hero-photo-frame img {
+  width: 100%;
+  display: block;
+  filter: sepia(0.15) contrast(1.05);
+}
+
+.hero-photo-caption {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: rgba(242, 237, 215, 0.3);
+  letter-spacing: 0.08em;
+  margin-top: 0.5rem;
+  text-align: right;
+}
+
+/* Placeholder when no photo yet */
+.hero-photo-placeholder {
+  width: 100%;
+  aspect-ratio: 3/4;
+  max-width: 380px;
+  border: 1px dashed rgba(242, 237, 215, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  color: rgba(242, 237, 215, 0.2);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+}
+
+@media (max-width: 768px) {
+  .hero-content { padding: 2rem 1.5rem 2.5rem; }
+  .hero-chart { padding: 0 1.5rem 2.5rem; }
+  .hero-name { font-size: clamp(3.5rem, 14vw, 5.5rem); }
+}
+
+/* ==============================================
+   RIVER DIVIDER
+   ============================================== */
+.river-divider {
+  height: 48px;
+  background: var(--river);
+  position: relative;
+  overflow: hidden;
+}
+.river-divider::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 48px;
+  background: var(--map-cream);
+  clip-path: ellipse(55% 100% at 50% 100%);
+}
+
+/* ==============================================
+   SECTION UTILITIES
+   ============================================== */
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--fog);
+  margin-bottom: 2rem;
+}
+
+/* ==============================================
+   LISTENING ROOM
+   ============================================== */
+.lr-header {
+  background: var(--ink);
+  color: #c0c8cc;
+  padding: 4rem 3rem 2.5rem;
+}
+
+.listening-room .section-label {
+  color: rgba(192, 200, 204, 0.35);
+  margin-bottom: 1.5rem;
+}
+
+.lr-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+  font-weight: 400;
+  font-style: italic;
+  color: #e8eaec;
+  line-height: 1.25;
+  margin-bottom: 0.5rem;
+  max-width: 780px;
+}
+
+.lr-subtitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--copper-light);
+  line-height: 1.25;
+  margin-bottom: 0.75rem;
+}
+
+.lr-cta {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: rgba(192, 200, 204, 0.45);
+  letter-spacing: 0.08em;
+}
+
+.listening-room {
+  background: #000;
+  color: #c0c8cc;
+}
+
+.lr-player-grid {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  height: 75vh;
+  min-height: 450px;
+  max-height: 800px;
+}
+
+.tracklist {
+  background: #080d12;
+  overflow-y: auto;
+  font-family: var(--font-mono);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(192,200,204,0.15) transparent;
+}
+.tracklist::-webkit-scrollbar { width: 4px; }
+.tracklist::-webkit-scrollbar-track { background: transparent; }
+.tracklist::-webkit-scrollbar-thumb { background: rgba(192,200,204,0.15); border-radius: 2px; }
+
+.track { cursor: pointer; transition: all 0.2s; position: relative; display: block; }
+.track:last-child { border-bottom: none; }
+
+.track::after {
+  content: '';
+  position: absolute;
+  right: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: transparent;
+  transition: background 0.2s;
+}
+.track.active::after { background: var(--copper); }
+.track:hover { background: rgba(255,255,255,0.04); }
+.track.active { background: rgba(181, 101, 29, 0.1); }
+
+.track-thumb { width: 100%; aspect-ratio: 16/9; overflow: hidden; position: relative; display: block; }
+.track-thumb img { width: 100%; height: 100%; object-fit: cover; opacity: 0.5; transition: opacity 0.25s; display: block; }
+.track:hover .track-thumb img { opacity: 0.75; }
+.track.active .track-thumb img { opacity: 0.9; }
+
+.track-thumb::after {
+  content: '▶';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: rgba(255,255,255,0);
+  transition: color 0.2s;
+  pointer-events: none;
+}
+.track:hover .track-thumb::after { color: rgba(255,255,255,0.6); }
+.track.active .track-thumb::after { content: ''; }
+
+.track-info {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.6rem;
+  background: rgba(0,0,0,0.3);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.track-dot { width: 5px; height: 5px; border-radius: 50%; background: transparent; flex-shrink: 0; transition: background 0.3s; }
+.track.active .track-dot { background: var(--copper); animation: pulse-dot 1.5s ease-in-out infinite; }
+@keyframes pulse-dot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.4); } }
+
+.track-num { font-size: 0.7rem; color: rgba(192,200,204,0.2); flex-shrink: 0; }
+.track-name { font-size: 0.72rem; color: #6a7a82; transition: color 0.2s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 1; min-width: 0; }
+.track.active .track-name { color: #e8eaec; }
+.track:hover .track-name { color: #a0b0b8; }
+.track-leaders { display: none; }
+.track-duration { font-size: 0.65rem; color: rgba(192,200,204,0.2); flex-shrink: 0; }
+.track.active .track-duration { color: var(--copper); font-size: 0.6rem; }
+
+.yt-player { position: relative; width: 100%; height: 100%; background: #000; overflow: hidden; }
+#ytPlayerTarget { position: absolute; inset: 0; }
+.yt-player iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+.yt-placeholder {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.25rem;
+  cursor: pointer;
+  background: radial-gradient(ellipse at center, rgba(27, 58, 75, 0.25) 0%, #000 70%);
+}
+.yt-placeholder .play-circle {
+  width: 72px; height: 72px;
+  border: 2px solid rgba(255,255,255,0.1);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.2);
+  font-size: 1.5rem;
+  transition: all 0.3s;
+}
+.yt-placeholder:hover .play-circle { border-color: var(--copper); color: var(--copper); transform: scale(1.08); }
+.yt-placeholder span { font-family: var(--font-mono); font-size: 0.82rem; color: rgba(255,255,255,0.18); letter-spacing: 0.12em; text-transform: uppercase; }
+
+@media (max-width: 768px) {
+  .lr-header { padding: 3rem 1.5rem 2rem; }
+  .lr-player-grid { grid-template-columns: 1fr; grid-template-rows: 56vw auto; height: auto; min-height: 0; max-height: none; }
+  .yt-player { order: -1; height: auto; }
+  .tracklist { display: flex; flex-direction: row; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .tracklist::-webkit-scrollbar { display: none; }
+  .track { flex-shrink: 0; width: 140px; }
+  .track-info { padding: 0.35rem 0.5rem; }
+  .track::after { right: 0; left: 0; top: auto; bottom: 0; width: auto; height: 2px; }
+}
+
+/* ==============================================
+   THE FILE — ABOUT SECTION
+   ============================================== */
+.the-file {
+  background: var(--paper);
+  padding: 5rem 3rem;
+  position: relative;
+}
+
+.pullquote {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.25;
+  color: var(--ink);
+  max-width: 860px;
+  margin-bottom: 4rem;
+  position: relative;
+  padding-left: 1.5rem;
+}
+.pullquote::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0.2em; bottom: 0.2em;
+  width: 3px;
+  background: var(--copper);
+}
+
+.file-grid {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+@media (max-width: 900px) { .file-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+.file-photo-col { display: flex; flex-direction: column; gap: 1.5rem; }
+
+.file-photo {
+  position: relative;
+  background: var(--frame);
+  padding: 0.55rem;
+  box-shadow: 0 6px 30px rgba(26,26,46,0.08);
+}
+
+.bio-editorial {
+  font-family: var(--font-body);
+  font-size: 1.02rem;
+  line-height: 1.85;
+  color: var(--ink);
+  margin-bottom: 1.5rem;
+}
+.bio-editorial em { color: var(--river); font-style: italic; }
+
+.bio-dossier {
+  font-family: var(--font-mono);
+  font-size: 0.92rem;
+  line-height: 1.9;
+  color: rgba(26, 26, 46, 0.5);
+  padding: 1.25rem;
+  background: var(--map-cream);
+  border: 1px dashed rgba(26,26,46,0.12);
+  margin-bottom: 2rem;
+}
+.bio-dossier strong { color: var(--ink); font-weight: 600; }
+
+.file-links { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.file-links a {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.05em;
+  color: var(--ink);
+  padding: 0.4rem 0.75rem;
+  border: 1px solid rgba(26,26,46,0.15);
+  background: var(--paper);
+  transition: all 0.2s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+.file-links a::after { content: '↗'; font-size: 0.75rem; opacity: 0; transition: opacity 0.2s; }
+.file-links a:hover { border-color: var(--river); color: var(--river); text-decoration: none; }
+.file-links a:hover::after { opacity: 1; }
+
+.spotify-embed iframe { border-radius: 12px; display: block; }
+
+@media (max-width: 768px) { .the-file { padding: 3.5rem 1.5rem; } }
+
+/* ==============================================
+   SCENE DIVIDER — full-bleed photo strip
+   ============================================== */
+.scene-divider {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  max-height: 240px;
+  background: var(--river);
+}
+.scene-divider img {
+  width: 100%;
+  display: block;
+  filter: saturate(0.7) contrast(1.1);
+  object-fit: cover;
+  height: 240px;
+  opacity: 0.75;
+}
+.scene-divider::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(27,58,75,0.5) 0%, transparent 40%, transparent 60%, rgba(27,58,75,0.5) 100%);
+  pointer-events: none;
+}
+
+/* ==============================================
+   THE SHOW — FIELD JOURNAL CARD
+   ============================================== */
+.the-show {
+  background: var(--map-cream);
+  padding: 5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.show-columns {
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 900px;
+}
+
+@media (max-width: 768px) {
+  .show-columns { flex-direction: column; gap: 2rem; }
+  .the-show { padding: 3.5rem 1.5rem; }
+}
+
+/* Field journal card */
+.journal-card {
+  flex: 1;
+  min-width: 0;
+  border: 2px solid var(--river);
+  background: var(--paper);
+  padding: 2.75rem 2.5rem 2.5rem;
+  position: relative;
+  box-shadow: 4px 6px 0 rgba(27, 58, 75, 0.12);
+}
+
+/* Corner stamp */
+.journal-card::before {
+  content: '✦';
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--copper);
+  position: absolute;
+  top: -0.6rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--map-cream);
+  padding: 0 0.75rem;
+}
+
+.journal-card-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--fog);
+  margin-bottom: 0.6rem;
+}
+
+.journal-card-date {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  font-weight: 900;
+  font-style: italic;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 2rem;
+}
+
+.journal-card-details {
+  font-family: var(--font-mono);
+  font-size: 0.92rem;
+  line-height: 2.2;
+  color: var(--ink);
+  border-top: 1px solid rgba(27,58,75,0.1);
+  border-bottom: 1px solid rgba(27,58,75,0.1);
+  padding: 1.25rem 0;
+  margin-bottom: 1.5rem;
+}
+
+.dl { color: var(--fog); display: inline; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; font-size: 0.8rem; }
+
+.journal-card-note {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(26, 26, 46, 0.6);
+  line-height: 1.7;
+}
+
+/* Side accent — past show thumbnail or decorative element */
+.show-accent {
+  flex-shrink: 0;
+  width: 240px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.show-accent-frame {
+  background: var(--frame);
+  padding: 10px;
+  box-shadow: 2px 4px 18px rgba(26,26,46,0.1);
+  transform: rotate(1.2deg);
+  transition: transform 0.4s ease;
+}
+.show-accent-frame:hover { transform: rotate(0deg) scale(1.02); }
+.show-accent-frame img { width: 100%; display: block; filter: sepia(0.1); }
+.show-accent-caption { font-family: var(--font-mono); font-size: 0.75rem; color: var(--fog); text-align: center; letter-spacing: 0.05em; }
+
+/* ==============================================
+   TICKETS — RSVP FORM
+   ============================================== */
+.tickets {
+  padding: 5rem 2rem;
+  position: relative;
+  background: var(--river);
+  overflow: hidden;
+}
+
+/* Topo lines on dark background */
+.tickets::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.06;
+  background-image:
+    repeating-linear-gradient(
+      -20deg,
+      transparent,
+      transparent 50px,
+      rgba(242, 237, 215, 1) 50px,
+      rgba(242, 237, 215, 1) 51px
+    );
+}
+
+.tickets > * { position: relative; z-index: 1; }
+
+.tickets-inner {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.tickets-heading {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 7vw, 5rem);
+  font-weight: 900;
+  font-style: italic;
+  color: var(--map-cream);
+  line-height: 0.95;
+  margin-bottom: 0.6rem;
+}
+
+.tickets-subhead {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  color: rgba(242, 237, 215, 0.5);
+  letter-spacing: 0.1em;
+  margin-bottom: 2.5rem;
+}
+
+/* Live seat count */
+.seats-strip {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  padding: 0.75rem 1.25rem;
+  border: 1px solid rgba(242, 237, 215, 0.2);
+  background: rgba(242, 237, 215, 0.05);
+  width: fit-content;
+}
+
+.seats-num {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 900;
+  font-style: italic;
+  color: var(--copper-light);
+  line-height: 1;
+  animation: gentle-pulse 3s ease-in-out infinite;
+}
+
+@keyframes gentle-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+}
+
+.seats-label {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: rgba(242, 237, 215, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+}
+
+/* Pricing note */
+.pricing-note {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: rgba(242, 237, 215, 0.65);
+  line-height: 1.8;
+  margin-bottom: 2.5rem;
+  padding: 1rem 1.25rem;
+  border-left: 3px solid var(--copper);
+  background: rgba(242, 237, 215, 0.04);
+}
+.pricing-note strong { color: var(--map-cream); font-weight: 600; }
+
+/* RSVP Form */
+.rsvp-form {
+  background: var(--paper);
+  padding: 2.5rem;
+  position: relative;
+}
+
+.rsvp-form-title {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  font-style: italic;
+  color: var(--ink);
+  margin-bottom: 0.3rem;
+}
+
+.rsvp-form-sub {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--fog);
+  letter-spacing: 0.06em;
+  margin-bottom: 2rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.form-group.full { grid-column: 1 / -1; }
+
+label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fog);
+  font-weight: 500;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+select {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  color: var(--ink);
+  background: var(--map-cream);
+  border: 1px solid rgba(26, 26, 46, 0.18);
+  padding: 0.65rem 0.9rem;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.2s;
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 0;
+}
+
+input:focus, select:focus {
+  border-color: var(--river);
+}
+
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234A6741' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.9rem center;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+
+/* Ticket quantity rows */
+.ticket-qty-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* Payment choice */
+.payment-choice {
+  margin-bottom: 1.5rem;
+}
+
+.payment-options {
+  display: flex;
+  gap: 0;
+  margin-top: 0.5rem;
+}
+
+.payment-option {
+  flex: 1;
+  position: relative;
+}
+
+.payment-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.payment-option label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 1rem 0.75rem;
+  background: var(--map-cream);
+  border: 1px solid rgba(26, 26, 46, 0.18);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 0.82rem;
+  color: rgba(26, 26, 46, 0.6);
+  text-align: center;
+  line-height: 1.3;
+}
+
+.payment-option:first-child label { border-right: none; }
+
+.payment-option input:checked + label {
+  background: var(--river);
+  border-color: var(--river);
+  color: var(--map-cream);
+}
+
+.payment-option label .pay-icon {
+  font-size: 1.3rem;
+}
+
+.payment-option label .pay-name {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.payment-option label .pay-hint {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-style: italic;
+  opacity: 0.75;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* Venmo instructions — revealed after payment choice */
+.venmo-instructions {
+  display: none;
+  margin-bottom: 1.5rem;
+  padding: 1rem 1.25rem;
+  background: var(--map-cream);
+  border-left: 3px solid var(--river);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--ink);
+  line-height: 1.7;
+}
+
+.venmo-instructions.visible { display: block; }
+.venmo-instructions code {
+  display: inline-block;
+  background: var(--paper);
+  border: 1px solid rgba(26,26,46,0.12);
+  padding: 0.15rem 0.45rem;
+  color: var(--river);
+  font-weight: 600;
+}
+
+/* Submit button */
+.rsvp-submit {
+  width: 100%;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--map-cream);
+  background: var(--river);
+  border: 2px solid var(--river);
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 0.5rem;
+}
+
+.rsvp-submit:hover {
+  background: var(--river-light);
+  border-color: var(--river-light);
+}
+
+.rsvp-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Success state */
+.rsvp-success {
+  display: none;
+  padding: 2.5rem;
+  text-align: center;
+  background: var(--paper);
+}
+
+.rsvp-success.visible { display: block; }
+
+.rsvp-success-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.rsvp-success-title {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 900;
+  font-style: italic;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+}
+
+.rsvp-success-body {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  color: var(--fog);
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+}
+
+.venmo-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #008CFF;
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 0.8rem 1.75rem;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.venmo-cta:hover { background: #006FCC; text-decoration: none; color: #fff; }
+
+.cash-note {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--fog);
+  margin-top: 1rem;
+}
+
+@media (max-width: 600px) {
+  .tickets { padding: 3.5rem 1.5rem; }
+  .rsvp-form { padding: 1.75rem 1.5rem; }
+  .form-row { grid-template-columns: 1fr; }
+  .ticket-qty-row { grid-template-columns: 1fr; }
+}
+
+/* ==============================================
+   PHOTO BREAK
+   ============================================== */
+.photo-break {
+  position: relative;
+  overflow: hidden;
+  max-height: 50vh;
+  border-top: 1px solid rgba(26,26,46,0.08);
+  border-bottom: 1px solid rgba(26,26,46,0.08);
+}
+.photo-break img { width: 100%; height: 50vh; object-fit: cover; object-position: center 35%; }
+.photo-break::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(27, 58, 75, 0.1);
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+.photo-break .photo-credit {
+  position: absolute;
+  bottom: 0.75rem; right: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.5);
+  background: rgba(0,0,0,0.2);
+  padding: 0.2rem 0.5rem;
+  backdrop-filter: blur(4px);
+  z-index: 2;
+}
+
+/* ==============================================
+   FOOTER
+   ============================================== */
+footer {
+  background: var(--ink);
+  border-top: 1px solid rgba(242, 237, 215, 0.06);
+  padding: 3.5rem 3rem 2.5rem;
+}
+
+.footer-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1.5rem;
+}
+
+.footer-presented {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: rgba(242, 237, 215, 0.35);
+  margin-bottom: 0.3rem;
+}
+
+.footer-note {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(242, 237, 215, 0.75);
+}
+
+.footer-credits {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: rgba(242, 237, 215, 0.3);
+  text-align: right;
+  line-height: 1.8;
+}
+.footer-credits a { color: rgba(242, 237, 215, 0.3); }
+.footer-credits a:hover { color: var(--copper-light); }
+
+.footer-url {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: rgba(242, 237, 215, 0.1);
+  text-align: center;
+  margin-top: 2rem;
+  letter-spacing: 0.08em;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 600px) {
+  footer { padding: 2.5rem 1.5rem 2rem; }
+  .footer-inner { flex-direction: column; align-items: flex-start; }
+  .footer-credits { text-align: left; }
+}
+
+/* ==============================================
+   SCROLL REVEAL
+   ============================================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.reveal-stagger.visible > * { opacity: 1; transform: translateY(0); }
+.reveal-stagger.visible > *:nth-child(1) { transition-delay: 0s; }
+.reveal-stagger.visible > *:nth-child(2) { transition-delay: 0.06s; }
+.reveal-stagger.visible > *:nth-child(3) { transition-delay: 0.12s; }
+.reveal-stagger.visible > *:nth-child(4) { transition-delay: 0.18s; }
+.reveal-stagger.visible > *:nth-child(5) { transition-delay: 0.24s; }
+</style>
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- Nav -->
+<nav class="nav-bar">
+  <div class="nav-url"><b>paulspring</b>.music/live/cherry-knolls</div>
+  <div class="nav-links">
+    <a href="#listen">listen</a>
+    <a href="#about">about</a>
+    <a href="#show">the show</a>
+    <a href="#rsvp">rsvp</a>
+    <a href="/archive.html">all shows</a>
+  </div>
+</nav>
+
+<a class="mobile-cta" id="mobileCta" href="#rsvp">RSVP ↓</a>
+
+<!-- ==============================================
+     HERO
+     ============================================== -->
+<section class="hero" id="top">
+  <div class="hero-content">
+    <div class="hero-date">June 27, 2026 &nbsp;·&nbsp; Cherry Knolls, CO</div>
+    <h1 class="hero-name"><span>Paul </span><span>Spring</span></h1>
+    <div class="hero-coords">39.5731° N, 104.8728° W &nbsp;·&nbsp; A living room</div>
+    <p class="hero-tagline">He paddled 1,200 miles down the Mississippi to release an album. We figured the least we could do was invite him into our living room.</p>
+  </div>
+  <div class="hero-chart">
+    <div class="hero-photo">
+      <!-- Add a portrait photo of Paul Spring here: img/paul-01.jpg -->
+      <div class="hero-photo-placeholder">
+        [ photo ]<br>paul-01.jpg
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="river-divider"></div>
+
+<!-- ==============================================
+     LISTENING ROOM
+     ============================================== -->
+<div class="lr-header" id="listen">
+  <div class="section-label reveal">the listening room</div>
+  <div class="lr-title reveal">SNL. Fleet Foxes. A canoe on the Hudson.</div>
+  <div class="lr-subtitle reveal">Meet Paul Spring.</div>
+  <div class="lr-cta reveal">Press play.</div>
+</div>
+
+<section class="listening-room">
+  <div class="lr-player-grid">
+    <div class="tracklist" id="tracklist">
+      <div class="track active" data-id="U7hLy9bwJEg">
+        <div class="track-thumb"><img src="https://img.youtube.com/vi/U7hLy9bwJEg/mqdefault.jpg" alt="" loading="lazy"></div>
+        <div class="track-info">
+          <span class="track-dot"></span>
+          <span class="track-num">01</span>
+          <span class="track-name">Dumb and Free (Live)</span>
+          <span class="track-leaders"></span>
+          <span class="track-duration">now playing</span>
+        </div>
+      </div>
+      <div class="track" data-id="VwmPflPuvp8">
+        <div class="track-thumb"><img src="https://img.youtube.com/vi/VwmPflPuvp8/mqdefault.jpg" alt="" loading="lazy"></div>
+        <div class="track-info">
+          <span class="track-dot"></span>
+          <span class="track-num">02</span>
+          <span class="track-name">Over and Over (Burp Castle)</span>
+          <span class="track-leaders"></span>
+          <span class="track-duration">3:14</span>
+        </div>
+      </div>
+      <div class="track" data-id="GunxJ5MLEKw">
+        <div class="track-thumb"><img src="https://img.youtube.com/vi/GunxJ5MLEKw/mqdefault.jpg" alt="" loading="lazy"></div>
+        <div class="track-info">
+          <span class="track-dot"></span>
+          <span class="track-num">03</span>
+          <span class="track-name">The Valley (Live on Hudson)</span>
+          <span class="track-leaders"></span>
+          <span class="track-duration">4:02</span>
+        </div>
+      </div>
+      <div class="track" data-id="m4Jc7-31p9M">
+        <div class="track-thumb"><img src="https://img.youtube.com/vi/m4Jc7-31p9M/mqdefault.jpg" alt="" loading="lazy"></div>
+        <div class="track-info">
+          <span class="track-dot"></span>
+          <span class="track-num">04</span>
+          <span class="track-name">Wolves (North Cascades)</span>
+          <span class="track-leaders"></span>
+          <span class="track-duration">3:48</span>
+        </div>
+      </div>
+      <div class="track" data-id="Mrhwuzqondw">
+        <div class="track-thumb"><img src="https://img.youtube.com/vi/Mrhwuzqondw/mqdefault.jpg" alt="" loading="lazy"></div>
+        <div class="track-info">
+          <span class="track-dot"></span>
+          <span class="track-num">05</span>
+          <span class="track-name">Far from the Flame (Sand Dunes)</span>
+          <span class="track-leaders"></span>
+          <span class="track-duration">4:21</span>
+        </div>
+      </div>
+      <div class="track" data-id="vyHXCsFX6I8">
+        <div class="track-thumb"><img src="https://img.youtube.com/vi/vyHXCsFX6I8/mqdefault.jpg" alt="" loading="lazy"></div>
+        <div class="track-info">
+          <span class="track-dot"></span>
+          <span class="track-num">06</span>
+          <span class="track-name">Thunderhead (Official Video)</span>
+          <span class="track-leaders"></span>
+          <span class="track-duration">3:55</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="yt-player" id="ytPlayerContainer">
+      <div id="ytPlayerTarget"></div>
+      <div class="yt-placeholder" id="ytPlaceholder">
+        <div class="play-circle">&#9654;</div>
+        <span>select a track</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==============================================
+     THE FILE ON PAUL SPRING
+     ============================================== -->
+<section class="the-file" id="about">
+  <div class="section-label reveal">the file on paul spring</div>
+
+  <blockquote class="pullquote reveal">
+    "Richly realised songs with deft lyrics and considered sensibility."
+    <footer style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--fog); letter-spacing: 0.08em; margin-top: 0.75rem; font-style: normal;">— Irish Times</footer>
+  </blockquote>
+
+  <div class="file-grid">
+    <div class="file-photo-col">
+      <!-- Add a second photo here: img/paul-02.jpg -->
+      <div class="file-photo reveal" style="background: var(--frame); aspect-ratio: 4/5; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 0.75rem; color: var(--fog); letter-spacing: 0.08em;">
+        [ photo ]<br>paul-02.jpg
+      </div>
+      <div class="spotify-embed reveal">
+        <iframe src="https://open.spotify.com/embed/artist/3nm10RPR7Ts3qPCwhQBUew?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      </div>
+    </div>
+
+    <div class="file-text">
+      <p class="bio-editorial reveal">
+        Paul Spring grew up in rural Minnesota, spent his teenage years in <em>Spiddal, Co. Galway</em> absorbing Irish traditional music, and eventually landed in Queens, New York. He is a great-grandson of poet Joyce Kilmer and impressionist painter Frederick Frieseke — which tells you something about how he moves through the world. His music ranges from Bach transcriptions on a 12-string to folk songs that cite Toni Braxton as a production influence, and it all somehow makes sense when you hear it.
+      </p>
+
+      <div class="bio-dossier reveal">
+        <strong>Based:</strong> Queens, New York<br>
+        <strong>From:</strong> Saint Cloud, MN — Spiddal, Co. Galway, Ireland<br>
+        <strong>Latest LP:</strong> <em>Dumb and Free</em> (2025)<br>
+        <strong>Also released in 2025:</strong> <em>Vita Brevis</em> (original compositions in Classical Latin)<br>
+        <strong>Session work:</strong> Post Malone (SNL), Fleet Foxes, Blackthought &amp; El Michels Affair<br>
+        <strong>Sampled by:</strong> Kenny Beats, Thundercat<br>
+        <strong>Former band:</strong> Holy Hive (with Homer Steinweiss of The Dap Kings)<br>
+        <strong>Notable expedition:</strong> Paddled 1,200 miles down the Mississippi to release an album
+      </div>
+
+      <p class="bio-editorial reveal">
+        His 2022 album <em>Thunderhead</em> was called a "hidden pop gem" by the Irish Times. His 2024 record <em>Kind of Heaven</em> was tracked live over two days with drummer Jon Nellen (Big Thief, Nick Hakim). His 2025 album <em>Dumb and Free</em> — recorded at a monthly residency — features songs written from the perspective of different people from his hometown. He is, in the best possible way, impossible to categorize.
+      </p>
+
+      <div class="file-links reveal-stagger reveal">
+        <a href="https://paulspringmusic.com" target="_blank" rel="noopener">paulspringmusic.com</a>
+        <a href="https://www.instagram.com/paulspring/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://open.spotify.com/artist/3nm10RPR7Ts3qPCwhQBUew" target="_blank" rel="noopener">Spotify</a>
+        <a href="https://paulspring.bandcamp.com" target="_blank" rel="noopener">Bandcamp</a>
+        <a href="https://www.youtube.com/@paulspringmusic" target="_blank" rel="noopener">YouTube</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==============================================
+     THE SHOW
+     ============================================== -->
+<section class="the-show" id="show">
+  <div class="section-label reveal" style="align-self: flex-start;">the show</div>
+
+  <div class="show-columns reveal">
+    <div class="journal-card">
+      <div class="journal-card-eyebrow">A Living Room Concert</div>
+      <div class="journal-card-date">June 27, 2026</div>
+
+      <div class="journal-card-details">
+        <span class="dl">When:</span> June 27, 2026 — Doors 6 PM — Show 7 PM<br>
+        <span class="dl">Where:</span> A living room in Cherry Knolls, Centennial CO<br>
+        <span class="dl">Capacity:</span> ~60 seats (all ages welcome)<br>
+        <span class="dl">Address:</span> Shared after RSVP
+      </div>
+
+      <div class="journal-card-note">
+        This is someone's actual house. Be present. Phones away during the set is appreciated — you're adults.
+      </div>
+    </div>
+
+    <div class="show-accent">
+      <!-- Optional: drop a photo of Paul or an album cover here -->
+      <div class="show-accent-frame" style="aspect-ratio: 1; display: flex; align-items: center; justify-content: center; background: var(--frame); font-family: var(--font-mono); font-size: 0.72rem; color: var(--fog); letter-spacing: 0.06em; text-align: center;">
+        [ album art<br>or photo ]
+      </div>
+      <div class="show-accent-caption">dumb and free — 2025</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==============================================
+     RSVP — GET IN THE ROOM
+     ============================================== -->
+<section class="tickets" id="rsvp">
+  <div class="tickets-inner">
+    <div class="section-label reveal" style="color: rgba(242,237,215,0.35);">get in</div>
+    <h2 class="tickets-heading reveal">Get in<br>the room.</h2>
+    <p class="tickets-subhead reveal">100% of proceeds go straight to the artist.</p>
+
+    <!-- Live seat count — populated by JS from Google Sheet -->
+    <div class="seats-strip reveal">
+      <div class="seats-num" id="seatsNum">–</div>
+      <div class="seats-label">seats<br>remaining</div>
+    </div>
+
+    <div class="pricing-note reveal">
+      <strong>Pay what you can.</strong> Suggested: $20 adults · $10 kids.<br>
+      Pay via Venmo after you RSVP, or settle up in cash at the door.
+    </div>
+
+    <!-- RSVP Form -->
+    <div class="rsvp-form reveal" id="rsvpFormWrap">
+      <div class="rsvp-form-title">Reserve your spot</div>
+      <div class="rsvp-form-sub">Takes 30 seconds. No account needed.</div>
+
+      <form id="rsvpForm" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName">First name</label>
+            <input type="text" id="firstName" name="firstName" autocomplete="given-name" required>
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last name</label>
+            <input type="text" id="lastName" name="lastName" autocomplete="family-name" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group full">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" autocomplete="email" required>
+          </div>
+        </div>
+
+        <div class="ticket-qty-row">
+          <div class="form-group">
+            <label for="adultTickets">Adult tickets</label>
+            <select id="adultTickets" name="adultTickets">
+              <option value="1">1</option>
+              <option value="2" selected>2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="kidTickets">Kid tickets (under 12)</label>
+            <select id="kidTickets" name="kidTickets">
+              <option value="0" selected>0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="payment-choice">
+          <label style="display: block; margin-bottom: 0.5rem;">How will you pay?</label>
+          <div class="payment-options">
+            <div class="payment-option">
+              <input type="radio" id="payVenmo" name="paymentMethod" value="Venmo" checked>
+              <label for="payVenmo">
+                <span class="pay-icon">💙</span>
+                <span class="pay-name">Venmo</span>
+                <span class="pay-hint">pay now online</span>
+              </label>
+            </div>
+            <div class="payment-option">
+              <input type="radio" id="payCash" name="paymentMethod" value="Cash at the door">
+              <label for="payCash">
+                <span class="pay-icon">🤝</span>
+                <span class="pay-name">Cash</span>
+                <span class="pay-hint">pay at the door</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="venmo-instructions" id="venmoInstructions">
+          After you RSVP, we'll send you to Venmo. In the note, include:<br>
+          <code id="venmoNote">Your Name — Paul Spring 6/27</code>
+        </div>
+
+        <button type="submit" class="rsvp-submit" id="rsvpSubmit">Reserve My Spot →</button>
+      </form>
+    </div>
+
+    <!-- Success state -->
+    <div class="rsvp-success" id="rsvpSuccess">
+      <div class="rsvp-success-icon">✦</div>
+      <div class="rsvp-success-title">You're in.</div>
+      <div class="rsvp-success-body" id="successBody">
+        We'll send the address to your email before the show.<br>
+        See you June 27th.
+      </div>
+      <a class="venmo-cta" id="venmoLink" href="https://venmo.com/ParkerFleming" target="_blank" rel="noopener" style="display: none;">
+        Pay on Venmo →
+      </a>
+      <p class="cash-note" id="cashNote" style="display: none;">
+        No worries — just bring cash to the door. See you there.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ==============================================
+     FOOTER
+     ============================================== -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-presented">Presented by The Fleming Family</div>
+      <div class="footer-note">Not a venue. Not a brand. Just good music in a living room.</div>
+    </div>
+    <div class="footer-credits">
+      <a href="/archive.html">all shows →</a>
+    </div>
+  </div>
+  <div class="footer-url">living-room-concert.fun</div>
+</footer>
+
+<!-- ==============================================
+     JS
+     ============================================== -->
+<script>
+// ---- CONFIG ----
+var EMAILJS_SERVICE_ID  = 'service_cookcourtsession';
+var EMAILJS_TEMPLATE_ID = 'template_ey6gl59';
+var GOOGLE_FORM_ID = '1wg8A3Nw2SEfzkyo49yvH10ruFvcBMuzwCSdd8RLIwmk';
+var FORM_ACTION = 'https://docs.google.com/forms/d/e/' + GOOGLE_FORM_ID + '/formResponse';
+var FIELDS = {
+  firstName:     'entry.41907648',
+  lastName:      'entry.1288251133',
+  email:         'entry.1864062099',
+  adultTickets:  'entry.89705005',
+  kidTickets:    'entry.1708120404',
+  paymentMethod: 'entry.1259835946'
+};
+var CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQOG-Vl2j5jMGS0r-RUoCSf30Y632Lx_STYL6d9Oy9lmln7rqPumdNms74lHIvJe7paX39E7v1z7Mha/pub?gid=731951556&single=true&output=csv';
+var TOTAL_SEATS = 60;
+var PRICE_ADULT = 20;
+var PRICE_KID = 10;
+
+// ---- SEAT COUNT ----
+(function() {
+  var el = document.getElementById('seatsNum');
+  if (!el) return;
+
+  function updateSeats() {
+    fetch(CSV_URL + '&cachebust=' + Date.now())
+      .then(function(r) { return r.text(); })
+      .then(function(csv) {
+        // Count data rows (subtract 1 for header row)
+        var rows = csv.trim().split('\n').filter(function(r) { return r.trim().length > 0; });
+        var rsvps = Math.max(0, rows.length - 1);
+        // Sum adult + kid tickets from columns D and E (index 3 and 4)
+        var ticketCount = 0;
+        for (var i = 1; i < rows.length; i++) {
+          var cols = rows[i].split(',');
+          var adults = parseInt(cols[3]) || 0;
+          var kids   = parseInt(cols[4]) || 0;
+          ticketCount += adults + kids;
+        }
+        var remaining = Math.max(0, TOTAL_SEATS - ticketCount);
+        el.textContent = remaining;
+        if (remaining === 0) {
+          el.textContent = '0';
+          el.closest('.seats-strip').style.borderColor = 'rgba(242,237,215,0.1)';
+          document.getElementById('rsvpSubmit').disabled = true;
+          document.getElementById('rsvpSubmit').textContent = 'Sold Out';
+        }
+      })
+      .catch(function() {
+        el.textContent = '?';
+      });
+  }
+
+  updateSeats();
+})();
+
+// ---- SCROLL PROGRESS ----
+(function() {
+  var bar = document.getElementById('scrollProgress');
+  window.addEventListener('scroll', function() {
+    var h = document.documentElement;
+    var pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    bar.style.width = pct + '%';
+  }, { passive: true });
+})();
+
+// ---- MOBILE CTA ----
+(function() {
+  var cta = document.getElementById('mobileCta');
+  var hero = document.querySelector('.hero');
+  var rsvp = document.getElementById('rsvp');
+  if (!cta || !hero || !rsvp) return;
+  var heroVisible = true, rsvpVisible = false;
+  function update() {
+    cta.classList.toggle('visible', !heroVisible && !rsvpVisible);
+    var rect = rsvp.getBoundingClientRect();
+    cta.textContent = rect.bottom < 0 ? 'RSVP ↑' : 'RSVP ↓';
+  }
+  new IntersectionObserver(function(e) { heroVisible = e[0].isIntersecting; update(); }, { threshold: 0 }).observe(hero);
+  new IntersectionObserver(function(e) { rsvpVisible = e[0].isIntersecting; update(); }, { threshold: 0 }).observe(rsvp);
+})();
+
+// ---- YOUTUBE PLAYER ----
+(function() {
+  var tracklist = document.getElementById('tracklist');
+  var placeholder = document.getElementById('ytPlaceholder');
+  var ytPlayer = null, playerReady = false, pendingVideoId = null;
+
+  var tag = document.createElement('script');
+  tag.src = 'https://www.youtube.com/iframe_api';
+  document.getElementsByTagName('script')[0].parentNode.insertBefore(tag, document.getElementsByTagName('script')[0]);
+
+  window.onYouTubeIframeAPIReady = function() {
+    ytPlayer = new YT.Player('ytPlayerTarget', {
+      playerVars: { rel: 0, playsinline: 1 },
+      events: {
+        onReady: function() {
+          playerReady = true;
+          if (pendingVideoId) { placeholder.style.display = 'none'; ytPlayer.loadVideoById(pendingVideoId); pendingVideoId = null; }
+        }
+      }
+    });
+  };
+
+  function loadVideo(id) {
+    if (placeholder) placeholder.style.display = 'none';
+    if (playerReady) { ytPlayer.loadVideoById(id); } else { pendingVideoId = id; }
+  }
+
+  tracklist.addEventListener('click', function(e) {
+    var track = e.target.closest('.track');
+    if (!track) return;
+    var id = track.dataset.id;
+    if (!id) return;
+    tracklist.querySelectorAll('.track').forEach(function(t) {
+      t.classList.remove('active');
+      var dur = t.querySelector('.track-duration');
+      if (dur.dataset.dur) dur.textContent = dur.dataset.dur;
+    });
+    track.classList.add('active');
+    var dur = track.querySelector('.track-duration');
+    if (!dur.dataset.dur) dur.dataset.dur = dur.textContent;
+    dur.textContent = 'now playing';
+    loadVideo(id);
+  });
+
+  if (placeholder) placeholder.addEventListener('click', function() {
+    var first = tracklist.querySelector('.track');
+    if (first) first.click();
+  });
+})();
+
+// ---- PAYMENT METHOD TOGGLE ----
+(function() {
+  var radios = document.querySelectorAll('input[name="paymentMethod"]');
+  var instructions = document.getElementById('venmoInstructions');
+  radios.forEach(function(r) {
+    r.addEventListener('change', function() {
+      instructions.classList.toggle('visible', r.value === 'Venmo' && r.checked);
+    });
+  });
+  // Show by default since Venmo is pre-selected
+  instructions.classList.add('visible');
+})();
+
+// ---- VENMO NOTE UPDATE ----
+(function() {
+  var firstName = document.getElementById('firstName');
+  var lastName  = document.getElementById('lastName');
+  var noteEl    = document.getElementById('venmoNote');
+  function update() {
+    var name = [firstName.value.trim(), lastName.value.trim()].filter(Boolean).join(' ') || 'Your Name';
+    noteEl.textContent = name + ' — Paul Spring 6/27';
+  }
+  firstName.addEventListener('input', update);
+  lastName.addEventListener('input', update);
+})();
+
+// ---- RSVP FORM SUBMIT ----
+(function() {
+  var form        = document.getElementById('rsvpForm');
+  var formWrap    = document.getElementById('rsvpFormWrap');
+  var success     = document.getElementById('rsvpSuccess');
+  var venmoLink   = document.getElementById('venmoLink');
+  var cashNote    = document.getElementById('cashNote');
+  var successBody = document.getElementById('successBody');
+  var submitBtn   = document.getElementById('rsvpSubmit');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    var firstName     = document.getElementById('firstName').value.trim();
+    var lastName      = document.getElementById('lastName').value.trim();
+    var email         = document.getElementById('email').value.trim();
+    var adultTickets  = document.getElementById('adultTickets').value;
+    var kidTickets    = document.getElementById('kidTickets').value;
+    var paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+
+    if (!firstName || !lastName || !email) {
+      alert('Please fill in your name and email.');
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+
+    var totalAdult = parseInt(adultTickets) * PRICE_ADULT;
+    var totalKid   = parseInt(kidTickets)   * PRICE_KID;
+    var total      = totalAdult + totalKid;
+    var totalTickets = parseInt(adultTickets) + parseInt(kidTickets);
+    var venmoNote  = firstName + ' ' + lastName + ' — Paul Spring 6/27 × ' + totalTickets;
+    var venmoUrl   = paymentMethod === 'Venmo'
+      ? 'https://venmo.com/ParkerFleming?txn=pay&amount=' + total + '&note=' + encodeURIComponent(venmoNote)
+      : '';
+
+    // 1. POST to Google Form (no-cors — response is always opaque, that's expected)
+    var googleData = new FormData();
+    googleData.append(FIELDS.firstName,     firstName);
+    googleData.append(FIELDS.lastName,      lastName);
+    googleData.append(FIELDS.email,         email);
+    googleData.append(FIELDS.adultTickets,  adultTickets);
+    googleData.append(FIELDS.kidTickets,    kidTickets);
+    googleData.append(FIELDS.paymentMethod, paymentMethod);
+
+    fetch(FORM_ACTION, { method: 'POST', body: googleData, mode: 'no-cors' })
+      .then(function() {
+        // 2. Send confirmation email via EmailJS
+        return emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+          email:           email,
+          firstName:       firstName,
+          lastName:        lastName,
+          adultTickets:    adultTickets,
+          kidTickets:      kidTickets,
+          paymentMethod:   paymentMethod,
+          totalDue:        total,
+          venmoNote:       venmoNote,
+          venmoUrl:        venmoUrl || 'https://venmo.com/ParkerFleming',
+          venmoMessage:    paymentMethod === 'Venmo'
+            ? 'To complete your RSVP, please send $' + total + ' on Venmo. Your name and amount are pre-filled in the link below — just tap and confirm.'
+            : 'You chose cash at the door. No problem — just bring $' + total + ' on the night. ($' + PRICE_ADULT + ' per adult, $' + PRICE_KID + ' per kid.)',
+          venmoButtonText: paymentMethod === 'Venmo'
+            ? 'Pay $' + total + ' on Venmo →'
+            : 'See you at the door ✦'
+        });
+      })
+      .then(function() {
+        showSuccess(firstName, lastName, adultTickets, kidTickets, paymentMethod, total, venmoUrl);
+      })
+      .catch(function() {
+        // Show success even if email fails — RSVP is already saved to Google Sheet
+        showSuccess(firstName, lastName, adultTickets, kidTickets, paymentMethod, total, venmoUrl);
+      });
+  });
+
+  function showSuccess(firstName, lastName, adults, kids, paymentMethod, total, venmoUrl) {
+    formWrap.style.display = 'none';
+    success.classList.add('visible');
+
+    var ticketSummary = adults + ' adult' + (adults > 1 ? 's' : '');
+    if (parseInt(kids) > 0) ticketSummary += ' + ' + kids + ' kid' + (kids > 1 ? 's' : '');
+    successBody.innerHTML = ticketSummary + ' reserved for <strong>' + firstName + ' ' + lastName + '</strong>.<br>A confirmation is on its way to your email.';
+
+    if (paymentMethod === 'Venmo') {
+      venmoLink.href = venmoUrl;
+      venmoLink.textContent = 'Pay $' + total + ' on Venmo →';
+      venmoLink.style.display = 'inline-flex';
+    } else {
+      cashNote.style.display = 'block';
+    }
+  }
+})();
+
+// ---- SCROLL REVEAL ----
+(function() {
+  var reveals = document.querySelectorAll('.reveal');
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) { entry.target.classList.add('visible'); obs.unobserve(entry.target); }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
+  reveals.forEach(function(el) { obs.observe(el); });
+})();
+</script>
+
+</body>
+</html>
