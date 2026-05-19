@@ -1515,8 +1515,7 @@ footer {
         </div>
 
         <div class="venmo-instructions" id="venmoInstructions">
-          After you RSVP, we'll send you to Venmo. In the note, include:<br>
-          <code id="venmoNote">Your Name — Paul Spring 6/27</code>
+          After submitting, you'll get a pre-filled Venmo link — just tap and confirm.
         </div>
 
         <button type="submit" class="rsvp-submit" id="rsvpSubmit">Reserve My Spot →</button>
@@ -1715,12 +1714,7 @@ var PRICE_KID = 10;
 (function() {
   var firstName = document.getElementById('firstName');
   var lastName  = document.getElementById('lastName');
-  var noteEl    = document.getElementById('venmoNote');
-  function update() {
-    var name = [firstName.value.trim(), lastName.value.trim()].filter(Boolean).join(' ') || 'Your Name';
-    noteEl.textContent = name + ' — Paul Spring 6/27';
-  }
-  firstName.addEventListener('input', update);
+  firstName.addEventListener('input', function() {});
   lastName.addEventListener('input', update);
 })();
 
