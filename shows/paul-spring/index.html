@@ -743,25 +743,19 @@ img { display: block; max-width: 100%; }
 .tickets {
   padding: 5rem 2rem;
   position: relative;
-  background: var(--river);
+  background-color: var(--river);
+  background-image: url('img/parchment-background.jpg');
+  background-size: cover;
+  background-position: center;
   overflow: hidden;
 }
 
-/* Topo lines on dark background */
 .tickets::before {
   content: '';
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0.06;
-  background-image:
-    repeating-linear-gradient(
-      -20deg,
-      transparent,
-      transparent 50px,
-      rgba(242, 237, 215, 1) 50px,
-      rgba(242, 237, 215, 1) 51px
-    );
+  background: rgba(15, 30, 42, 0.72);
 }
 
 .tickets > * { position: relative; z-index: 1; }
