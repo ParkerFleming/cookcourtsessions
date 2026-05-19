@@ -1492,6 +1492,12 @@ footer {
           </div>
         </div>
 
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <label for="donationAmount">Suggested donation</label>
+          <input type="number" id="donationAmount" name="donationAmount" min="0" step="1">
+          <div id="donationMath" style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--fog); margin-top: 0.35rem; letter-spacing: 0.04em;"></div>
+        </div>
+
         <div class="payment-choice">
           <label style="display: block; margin-bottom: 0.5rem;">How will you pay?</label>
           <div class="payment-options">
@@ -1697,6 +1703,37 @@ var PRICE_KID = 10;
   });
 })();
 
+// ---- DONATION CALCULATOR ----
+(function() {
+  var adultSel  = document.getElementById('adultTickets');
+  var kidSel    = document.getElementById('kidTickets');
+  var amountEl  = document.getElementById('donationAmount');
+  var mathEl    = document.getElementById('donationMath');
+  if (!adultSel || !amountEl) return;
+
+  function calc() {
+    var adults = parseInt(adultSel.value) || 0;
+    var kids   = parseInt(kidSel.value)   || 0;
+    var suggested = (adults * PRICE_ADULT) + (kids * PRICE_KID);
+
+    // Only auto-fill if user hasn't manually changed it
+    if (!amountEl.dataset.userEdited) {
+      amountEl.value = suggested;
+    }
+
+    var parts = [];
+    if (adults > 0) parts.push(adults + ' adult' + (adults > 1 ? 's' : '') + ' × $' + PRICE_ADULT);
+    if (kids > 0)   parts.push(kids   + ' kid'   + (kids   > 1 ? 's' : '') + ' × $' + PRICE_KID);
+    mathEl.textContent = parts.join(' + ') + ' = $' + suggested + ' suggested';
+  }
+
+  adultSel.addEventListener('change', function() { amountEl.dataset.userEdited = ''; calc(); });
+  kidSel.addEventListener('change',   function() { amountEl.dataset.userEdited = ''; calc(); });
+  amountEl.addEventListener('input',  function() { amountEl.dataset.userEdited = '1'; });
+
+  calc();
+})();
+
 // ---- PAYMENT METHOD TOGGLE ----
 (function() {
   var radios = document.querySelectorAll('input[name="paymentMethod"]');
@@ -1739,10 +1776,8 @@ var PRICE_KID = 10;
     submitBtn.disabled = true;
     submitBtn.textContent = 'Sending…';
 
-    var totalAdult = parseInt(adultTickets) * PRICE_ADULT;
-    var totalKid   = parseInt(kidTickets)   * PRICE_KID;
-    var total      = totalAdult + totalKid;
     var totalTickets = parseInt(adultTickets) + parseInt(kidTickets);
+    var total      = parseInt(document.getElementById('donationAmount').value) || (parseInt(adultTickets) * PRICE_ADULT + parseInt(kidTickets) * PRICE_KID);
     var venmoNote  = firstName + ' ' + lastName + ' — Paul Spring 6/27 × ' + totalTickets;
     var venmoUrl   = paymentMethod === 'Venmo'
       ? 'https://venmo.com/ParkerFleming?txn=pay&amount=' + total + '&note=' + encodeURIComponent(venmoNote)
