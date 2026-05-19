@@ -1596,7 +1596,7 @@ var PRICE_KID = 10;
   if (!el) return;
 
   function updateSeats() {
-    fetch(CSV_URL + '&cachebust=' + Date.now())
+    fetch(CSV_URL, { cache: 'no-store' })
       .then(function(r) { return r.text(); })
       .then(function(csv) {
         // Count data rows (subtract 1 for header row)
