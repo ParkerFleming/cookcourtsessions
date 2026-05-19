@@ -2087,6 +2087,7 @@ footer {
   var venmoPayBtn = document.getElementById('venmoPayBtn');
   var qrLink = document.getElementById('venmoQrLink');
   var noteEl = document.getElementById('ticketNote');
+  if (!minusBtn || !plusBtn) return;
   var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
   var qty = 0;
