@@ -166,30 +166,20 @@ img { display: block; max-width: 100%; }
   gap: 0;
   padding-top: 3rem;
   position: relative;
-  background: var(--river);
+  background-color: var(--river);
+  background-image: url('img/map-bg.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-blend-mode: multiply;
   overflow: hidden;
 }
 
-/* Topographic map lines as hero background */
+/* Dark overlay to deepen the map behind text */
 .hero::before {
   content: '';
   position: absolute;
   inset: 0;
-  background-image:
-    repeating-linear-gradient(
-      -30deg,
-      transparent,
-      transparent 60px,
-      rgba(242, 237, 215, 0.04) 60px,
-      rgba(242, 237, 215, 0.04) 61px
-    ),
-    repeating-linear-gradient(
-      60deg,
-      transparent,
-      transparent 80px,
-      rgba(242, 237, 215, 0.025) 80px,
-      rgba(242, 237, 215, 0.025) 81px
-    );
+  background: rgba(15, 30, 42, 0.55);
   pointer-events: none;
   z-index: 0;
 }
@@ -332,6 +322,10 @@ img { display: block; max-width: 100%; }
 }
 
 @media (max-width: 768px) {
+  .hero {
+    background-attachment: scroll;
+    background-position: center top;
+  }
   .hero-content { padding: 2rem 1.5rem 2.5rem; }
   .hero-chart { padding: 0 1.5rem 2.5rem; }
   .hero-name { font-size: clamp(3.5rem, 14vw, 5.5rem); }
