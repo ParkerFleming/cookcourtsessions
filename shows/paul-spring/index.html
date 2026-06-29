@@ -1228,12 +1228,9 @@ footer {
     <a href="#listen">listen</a>
     <a href="#about">about</a>
     <a href="#show">the show</a>
-    <a href="#rsvp">rsvp</a>
     <a href="/archive.html">all shows</a>
   </div>
 </nav>
-
-<a class="mobile-cta" id="mobileCta" href="#rsvp">RSVP ↓</a>
 
 <!-- ==============================================
      HERO
@@ -1425,122 +1422,20 @@ footer {
 </section>
 
 <!-- ==============================================
-     RSVP — GET IN THE ROOM
+     PAST EVENT
      ============================================== -->
 <section class="tickets" id="rsvp">
   <div class="tickets-inner">
-    <div class="section-label reveal" style="color: rgba(242,237,215,0.35);">rsvp</div>
-    <h2 class="tickets-heading reveal">Be there.</h2>
-    <p class="tickets-subhead reveal">100% of proceeds go straight to the artist.</p>
+    <div class="section-label reveal" style="color: rgba(242,237,215,0.35);">past event</div>
+    <h2 class="tickets-heading reveal">This show has passed.</h2>
+    <p class="tickets-subhead reveal">Thank you to everyone who attended.</p>
 
-    <!-- Live seat count — populated by JS from Google Sheet -->
-    <div class="seats-strip reveal">
-      <div class="seats-num" id="seatsNum">–</div>
-      <div class="seats-label">seats<br>remaining</div>
-    </div>
-
-    <div class="pricing-note reveal">
-      <strong>Pay what you can.</strong> Suggested: $20 adults · $10 kids.<br>
-      Pay via Venmo after you RSVP, or settle up in cash at the door.
-    </div>
-
-    <!-- RSVP Form -->
-    <div class="rsvp-form reveal" id="rsvpFormWrap">
-      <div class="rsvp-form-title">Reserve your spot</div>
-      <div class="rsvp-form-sub">Takes 30 seconds. No account needed.</div>
-
-      <form id="rsvpForm" novalidate>
-        <div class="form-row">
-          <div class="form-group">
-            <label for="firstName">First name</label>
-            <input type="text" id="firstName" name="firstName" autocomplete="given-name" required>
-          </div>
-          <div class="form-group">
-            <label for="lastName">Last name</label>
-            <input type="text" id="lastName" name="lastName" autocomplete="family-name" required>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group full">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" autocomplete="email" required>
-          </div>
-        </div>
-
-        <div class="ticket-qty-row">
-          <div class="form-group">
-            <label for="adultTickets">Adult tickets</label>
-            <select id="adultTickets" name="adultTickets">
-              <option value="1">1</option>
-              <option value="2" selected>2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="kidTickets">Kid tickets (under 12)</label>
-            <select id="kidTickets" name="kidTickets">
-              <option value="0" selected>0</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-group" style="margin-bottom: 1rem;">
-          <label for="donationAmount">Suggested donation</label>
-          <input type="number" id="donationAmount" name="donationAmount" min="0" step="1">
-          <div id="donationMath" style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--fog); margin-top: 0.35rem; letter-spacing: 0.04em;"></div>
-        </div>
-
-        <div class="payment-choice">
-          <label style="display: block; margin-bottom: 0.5rem;">How will you pay?</label>
-          <div class="payment-options">
-            <div class="payment-option">
-              <input type="radio" id="payVenmo" name="paymentMethod" value="Venmo" checked>
-              <label for="payVenmo">
-                <span class="pay-icon">💙</span>
-                <span class="pay-name">Venmo</span>
-                <span class="pay-hint">pay now online</span>
-              </label>
-            </div>
-            <div class="payment-option">
-              <input type="radio" id="payCash" name="paymentMethod" value="Cash at the door">
-              <label for="payCash">
-                <span class="pay-icon">🤝</span>
-                <span class="pay-name">Cash</span>
-                <span class="pay-hint">pay at the door</span>
-              </label>
-            </div>
-          </div>
-        </div>
-
-        <div class="venmo-instructions" id="venmoInstructions">
-          After submitting, you'll get a pre-filled Venmo link — just tap and confirm.
-        </div>
-
-        <button type="submit" class="rsvp-submit" id="rsvpSubmit">Reserve My Spot →</button>
-      </form>
-    </div>
-
-    <!-- Success state -->
-    <div class="rsvp-success" id="rsvpSuccess">
-      <div class="rsvp-success-icon">✦</div>
-      <div class="rsvp-success-title">You're in.</div>
-      <div class="rsvp-success-body" id="successBody">
-        We'll send the address to your email before the show.<br>
-        See you June 27th.
+    <div class="rsvp-form reveal" style="text-align: center; padding: 3rem 2.5rem;">
+      <div style="font-family: var(--font-mono); font-size: 0.95rem; line-height: 1.8; color: var(--ink); opacity: 0.8;">
+        Paul Spring performed on June 27, 2026.<br>
+        Check back soon for recordings and photos.<br><br>
+        <a href="/archive.html" style="color: var(--river); text-decoration: none; border-bottom: 1px solid var(--river);">View all shows →</a>
       </div>
-      <a class="venmo-cta" id="venmoLink" href="https://venmo.com/ParkerFleming" target="_blank" rel="noopener" style="display: none;">
-        Pay on Venmo →
-      </a>
-      <p class="cash-note" id="cashNote" style="display: none;">
-        No worries — just bring cash to the door. See you there.
-      </p>
     </div>
 
   </div>
